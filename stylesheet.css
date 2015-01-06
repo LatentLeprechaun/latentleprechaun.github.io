@@ -1,9 +1,9 @@
 #header{
   border: 4px solid blue;
-  min-height: 10em;
+  min-height: 20%;
 }
 
 #footer{
-  min-height: 4em;
+  min-height: 10%;
   color: AAEEAA;
 }
