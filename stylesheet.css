@@ -13,6 +13,7 @@
   min-height: 4%;
   font-size: 9px;
   color: #AAEEAA;
-	position: relative;
-	bottom: -20px;
+  position: relative;
+  bottom: -20px;
+  clear: both;
 }
