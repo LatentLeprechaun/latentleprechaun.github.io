@@ -1,7 +1,7 @@
 #header{
   border: 4px solid green;
   border-radius: 2px;
-  min-height: 8%;
+  /*min-height: 8%;*/
   padding: 50%;
 }
 
