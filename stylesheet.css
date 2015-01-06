@@ -1,0 +1,9 @@
+#header{
+  border: solid blue 4px;
+  min-height: 50em;
+}
+
+#footer{
+  min-height: 20em;
+  color: AAEEAA;
+}
