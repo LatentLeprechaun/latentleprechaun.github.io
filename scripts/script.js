@@ -1,1 +1,1 @@
-$(document).onLoad(alert(“Hello World!”);)
+window.document.onload(alert(“Hello World!”));
