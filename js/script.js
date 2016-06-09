@@ -1,1 +1,3 @@
-alert("Does this script thing work?");
+init = function() {
+  document.getElementById('ditig').innerHTML = "Hellloooooo?";
+};
