@@ -1,5 +1,1 @@
-var main_app = angular.module('MainApp', []);
-
-app.controller('MainController', ['$scope', function($scope) {
-  
-}]);
+alert("Does this script thing work?");
