@@ -5,15 +5,82 @@
     <title>Stuffs</title>
     <link type="text/css" rel="stylesheet" href="/css/stylesheet.css">
     <script type="text/javascript" src="js/script.js">Your browser does not have javascript turned on.</script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+    <link rel="stylesheet" href="css/bootstrap-image-gallery.min.css">
   </head>
-  
+
   <body onload="init()">
     <!--
     <div id="header">This is a site about stuffs.</div>
     <div id="footer">copyright 2015 LatentLeprechaun aka Joseph B. Raymond</div>
     -->
-    <h1>SITE IN PROGRESS</h1>
-    <p id="ditig"></p>
+    <div id="links">
+      <a href="images/GrumpyGuy.JPG" title="Some grumpy looking dude." data-gallery>
+          <img src="images/thumbnails/GrumpyGuy.jpg" alt="Grumpy guy">
+      </a>
+      <a href="images/Cloudscape.png" title="A digitally painted cloudscape." data-gallery>
+          <img src="images/thumbnails/Cloudscape.jpg" alt="Cloudscape">
+      </a>
+      <a href="images/Emil_sketch.JPG" title='A doodle of a character from "Stand Still, Stay Silent"' data-gallery>
+          <img src="images/thumbnails/Emil_sketch.jpg" alt="Emil doodle">
+      </a>
+      <a href="images/person_sketch.jpg" title="A simple pen sketch." data-gallery>
+          <img src="images/thumbnails/person_sketch.jpg" alt="A sketch of a woman">
+      </a>
+      <a href="images/profilepicssssgs.png" title="A profile picture that I didn't end up using." data-gallery>
+          <img src="images/thumbnails/profilpicssssgs.png" alt="An unused profile pic">
+      </a>
+      <a href="images/ShaneLouLarge.jpg" title="An attempt at a fictional character portrait." data-gallery>
+          <img src="images/thumbnails/ShaneLouLarge.jpg" alt="A character portrait">
+      </a>
+      <a href="images/SmugGuy.JPG" title="A smug looking dude." data-gallery>
+          <img src="images/thumbnails/SmugGuy.jpg" alt="A smug guy">
+      </a>
+      <a href="images/vamphunterdude.png" title="A vampire hunter, or something of that ilk." data-gallery>
+          <img src="images/thumbnails/vamphunterdude.png" alt="A vampire hunter">
+      </a>
+      <a href="images/WomanInSkirt.jpg" title="An attempt at a female full-body drawing." data-gallery>
+          <img src="images/thumbnails/WomanInSkirt.jpg" alt="A woman">
+      </a>
+    </div>
+    <!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
+    <div id="blueimp-gallery" class="blueimp-gallery">
+        <!-- The container for the modal slides -->
+        <div class="slides"></div>
+        <!-- Controls for the borderless lightbox -->
+        <h3 class="title"></h3>
+        <a class="prev">‹</a>
+        <a class="next">›</a>
+        <a class="close">×</a>
+        <a class="play-pause"></a>
+        <ol class="indicator"></ol>
+        <!-- The modal dialog, which will be used to wrap the lightbox content -->
+        <div class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body next"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left prev">
+                            <i class="glyphicon glyphicon-chevron-left"></i>
+                            Previous
+                        </button>
+                        <button type="button" class="btn btn-primary next">
+                            Next
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+    <script src="js/bootstrap-image-gallery.min.js"></script>
   </body>
-  
+
 </html>
