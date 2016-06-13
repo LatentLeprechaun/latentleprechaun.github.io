@@ -135,7 +135,7 @@ body {
   float: right;
   display: inline-block;
   top: 0;
-  width: Calc(90% - 200px);
+  width: Calc(80% - 200px);
   padding: 40px 100px 10px 100px;
   height: 100%;
   background: rgba(255,255,255,0.9);
