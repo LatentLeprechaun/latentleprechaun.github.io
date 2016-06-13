@@ -143,7 +143,6 @@ body {
 }
 
 #mainContent iframe {
-  display: inline-block;
   max-width: 100%;
   margin: auto;
 }
