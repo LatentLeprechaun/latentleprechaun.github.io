@@ -2,53 +2,115 @@
 <html>
 
   <head>
-    <title>RVs of America</title>
+    <title>Stuffs</title>
     <link type="text/css" rel="stylesheet" href="/css/stylesheet.css">
-    <script type="text/javascript" src="js/script.js">Your browser does not have javascript enabled</script>
-    <link href='https://fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="js/script.js">Your browser does not have javascript turned on.</script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+    <link rel="stylesheet" href="css/bootstrap-image-gallery.min.css">
   </head>
 
   <body onload="init()">
-    <div id="header">
-      <img id="header_logo" src="http://www.rvsofamerica.com/lib/images/logo.png"></img>
+    <!--
+    <div id="header">This is a site about stuffs.</div>
+    <div id="footer">copyright 2015 LatentLeprechaun aka Joseph B. Raymond</div>
+    -->
+    <div id="links">
+      <a href="images/GrumpyGuy.jpg" title="Some grumpy looking dude." data-gallery>
+          <img src="images/thumbnails/GrumpyGuy.jpg" alt="Grumpy guy">
+      </a>
+      <a href="images/Cloudscape.png" title="A digitally painted cloudscape." data-gallery>
+          <img src="images/thumbnails/Cloudscape.jpg" alt="Cloudscape">
+      </a>
+      <a href="images/Emil_sketch.jpg" title='A doodle of a character from "Stand Still, Stay Silent"' data-gallery>
+          <img src="images/thumbnails/Emil_sketch.jpg" alt="Emil doodle">
+      </a>
+      <a href="images/person_sketch.jpg" title="A simple pen sketch." data-gallery>
+          <img src="images/thumbnails/person_sketch.jpg" alt="A sketch of a woman">
+      </a>
+      <a href="images/profilepicssssgs.png" title="A profile picture that I didn't end up using." data-gallery>
+          <img src="images/thumbnails/profilpicssssgs.png" alt="An unused profile pic">
+      </a>
+      <a href="images/ShaneLouLarge.jpg" title="An attempt at a fictional character portrait." data-gallery>
+          <img src="images/thumbnails/ShaneLouLarge.jpg" alt="A character portrait">
+      </a>
+      <a href="images/SmugGuy.jpg" title="A smug looking dude." data-gallery>
+          <img src="images/thumbnails/SmugGuy.jpg" alt="A smug guy">
+      </a>
+      <a href="images/vamphunterdude.png" title="A vampire hunter, or something of that ilk." data-gallery>
+          <img src="images/thumbnails/vamphunterdude.png" alt="A vampire hunter">
+      </a>
+      <a href="images/WomanInSkirt.jpg" title="An attempt at a female full-body drawing." data-gallery>
+          <img src="images/thumbnails/WomanInSkirt.jpg" alt="A woman">
+      </a>
+      <a href="images/copic flower.jpg" title="A flower I drew with Copic markers." data-gallery>
+          <img src="images/thumbnails/copicflower.jpg" alt="A flower">
+      </a>
+      <a href="images/bear person.jpg" title="A bear-like person with glowing bladey things." data-gallery>
+          <img src="images/thumbnails/bearperson.jpg" alt="A bear person">
+      </a>
+      <a href="images/Anteaterprogression.jpg" title="An anteater-like creature going through a physiological change." data-gallery>
+          <img src="images/thumbnails/Anteaterprogression.jpg" alt="An anteater-like creature.">
+      </a>
+      <a href="images/SunGuardian.jpg" title="A doodle from the prompt: Angel of the Sun, Guardian of the Fire." data-gallery>
+          <img src="images/thumbnails/SunGuardian.jpg" alt="A fiery guardian">
+      </a>
+      <a href="images/Charcoal Doodles.jpg" title="Some sillyness in the form of charcoal doodles." data-gallery>
+          <img src="images/thumbnails/charcoaldoodles.jpg" alt="Some charcoal doodles">
+      </a>
+      <a href="images/lakephoto.jpg" title="A lake that I took a picture of." data-gallery>
+          <img src="images/thumbnails/lakephoto.jpg" alt="A photo of a lake">
+      </a>
+      <a href="images/outlook.jpg" title="A sketch of a peaceful cliffside scene." data-gallery>
+          <img src="images/thumbnails/outlook.jpg" alt="A sketch with a cliff.">
+      </a>
+      <a href="images/Skywardsword King.png" title="A sketch of a character from Skyward Sword. And a penguin." data-gallery>
+          <img src="images/thumbnails/skywardswordking.png" alt="A character from Skyward Sword">
+      </a>
+      <a href="images/rockyoceanlandscape.png" title="A landscape including rocks, ocean, and pine trees." data-gallery>
+          <img src="images/thumbnails/rockyoceanlandscape.png" alt="A landscape">
+      </a>
+      <!--<a href="images/FillInHere" title="FillInHere" data-gallery>
+          <img src="images/thumbnails/FillInHere" alt="FillInHere">
+      </a>-->
     </div>
-    <div id="navigation" class="navHidden">
-      <div id="navtab" onclick="navTabClicked()" onhover="navTabHover()">Menu</div>
-      <div class="button">Sell</div>
-      <div class="button">Consign</div>
-      <div class="button">About</div>
-      <div class="button">CONTACT US</div>
+    <!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
+    <div id="blueimp-gallery" class="blueimp-gallery">
+        <!-- The container for the modal slides -->
+        <div class="slides"></div>
+        <!-- Controls for the borderless lightbox -->
+        <h3 class="title"></h3>
+        <a class="prev">‹</a>
+        <a class="next">›</a>
+        <a class="close">×</a>
+        <a class="play-pause"></a>
+        <ol class="indicator"></ol>
+        <!-- The modal dialog, which will be used to wrap the lightbox content -->
+        <div class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body next"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left prev">
+                            <i class="glyphicon glyphicon-chevron-left"></i>
+                            Previous
+                        </button>
+                        <button type="button" class="btn btn-primary next">
+                            Next
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div id="contentFrame">
-      <div id="sideFringe">
-        <div class="redRoundel"><img src="https://www.rvsofamerica.com/lib/images/shiny.svg"/></div>
-        <div class="stepsContent"><h4>Decoration and Staging</h4>We will give your RV a professional cleaning, make sure that it has power and lights, check for needed repairs, and decorate it like it's a showroom centerpiece.</div>
-        <div class="redRoundel"><img src="https://www.rvsofamerica.com/lib/images/camera.svg"/></div>
-        <div class="stepsContent"><h4>Photos and Description</h4>Professional quality photos and video will make your RV shine like a hollywood star. We'll also give it a fantastic and detailed description by our boys in the know.</div>
-        <div class="redRoundel"><img src="https://www.rvsofamerica.com/lib/images/website.svg"/></div>
-        <div class="stepsContent"><h4>Advertising and Sales</h4>We will post your unit all across the web, on multiple classified sites, and on our best-in-class dealer site. Your RV will be seen by gazillions of people across the US.</div>
-        <div class="redRoundel"><span>$0</span></div>
-        <div class="stepsContent"><h4>No Fees Whatsoever</h4>We believe in our service, and we don't think that we should get paid for work we haven't done yet. We don't charge any fees to consign, and we don't get paid until your unit is sold.</div>
-        <div class="redRoundel"><img src="https://www.rvsofamerica.com/lib/images/bank.svg"/></div>
-        <div class="stepsContent"><h4>In-house Financing</h4>RV buyers often don't have the cash on hand to buy. We provide in-house financing through dozens of banks and credit unions so that you can get your money now, not ten years down the road.</div>
-        <div class="redRoundel"><img src="https://www.rvsofamerica.com/lib/images/sales.svg"/></div>
-        <div class="stepsContent"><h4>Dedicated Salesmen</h4>You work hard every day to bring home the bacon, you don't have time to show your RV to everyone who wants to buy it. Our sales team will do all the legwork for you, and get your RV sold.</div>
-      </div>
-      <div id="mainContent">
-        <h2>Stressed? Worried about making payments? Feeling crowded? Relax, take a deep breath, we're here to help you turn your RV into CASH!</h2>
-        <iframe width="640" height="360" src="https://www.youtube.com/embed/-BM3TGbgzM4" frameborder="0" allowfullscreen></iframe>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in justo sodales, ultrices mi lacinia, tempus felis. Curabitur nec magna vitae urna finibus finibus. Nunc maximus blandit tellus, id imperdiet ligula placerat eu. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis nec efficitur urna. Integer eget lorem condimentum nisl efficitur scelerisque. Aliquam ex elit, facilisis et ex euismod, consequat ullamcorper lacus. Donec in ante sit amet libero auctor rutrum nec vel risus. Nunc venenatis libero ut molestie dignissim. Duis quis dui ligula. Aliquam hendrerit viverra justo id placerat. Curabitur elementum placerat mi, ut semper felis sollicitudin eu. Nunc dignissim facilisis nunc non ultrices. Cras euismod accumsan lectus vitae accumsan. Vestibulum at sem elit.
-
-  Integer vel nulla elementum, ullamcorper nulla quis, fringilla lorem. Integer et ipsum lacinia, varius odio eget, vestibulum magna. Maecenas nisl enim, placerat eget mauris vitae, facilisis gravida massa. Mauris vel ultrices risus. Cras nec condimentum ex, id fringilla nisl. Mauris sollicitudin arcu ut placerat sollicitudin. Phasellus faucibus magna ut augue pulvinar, vitae ullamcorper ex varius. Donec leo ipsum, viverra posuere cursus eget, tempus sed sapien.
-
-  Sed at bibendum felis, nec posuere ipsum. Etiam vel rhoncus erat. Curabitur quis sapien ut lectus rutrum fermentum sed nec purus. Suspendisse potenti. Aenean quis lorem vitae nibh lacinia tempor. Proin interdum metus nec elit mollis viverra. In luctus mattis dui et congue. Etiam interdum eu elit vitae laoreet. Praesent sed nunc id sem mollis feugiat in sed lorem. Mauris iaculis sagittis turpis eu ornare. Duis volutpat, mi id dignissim egestas, ipsum diam rhoncus metus, vehicula laoreet neque mauris et mi. Nunc cursus metus et diam tincidunt scelerisque.
-
-  Vestibulum imperdiet vel urna at scelerisque. Suspendisse finibus scelerisque porttitor. In volutpat ipsum nec rutrum pharetra. Fusce malesuada, orci ac finibus volutpat, nunc ex venenatis libero, sit amet fermentum elit purus a tellus. Suspendisse potenti. Donec dapibus et ex et sodales. Nam rutrum neque quis pharetra hendrerit. Fusce consectetur enim arcu, quis tristique nibh blandit non. Nunc et venenatis elit. Donec hendrerit ante ultricies turpis facilisis commodo. Mauris dapibus, nulla ut feugiat aliquet, neque sem hendrerit massa, sit amet eleifend elit erat in leo. Fusce euismod eleifend vehicula. Nullam dui sapien, convallis a suscipit ac, suscipit eu augue. Praesent vitae imperdiet metus.
-
-  Quisque sed cursus lectus, nec gravida mi. Fusce faucibus, turpis quis accumsan fringilla, velit nunc pharetra risus, ac laoreet felis elit non risus. Vestibulum tristique bibendum orci, non posuere tortor. Vivamus id sem sodales, sodales metus eu, tempus augue. Etiam auctor ex nec pharetra pulvinar. Morbi ac sem sapien. Phasellus libero massa, lacinia vel dignissim vitae, pharetra at mauris. Suspendisse eu sem libero. Nam dapibus elit eget rhoncus maximus. Ut sit amet mi sapien. Integer non metus lorem. Ut quis ante ultricies, vehicula diam nec, sagittis elit. Integer eu tincidunt libero.</p>
-      </div>
-    </div>
-    <div id="footer">Content. Copyright info and such. contact info? Stuff</div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+    <script src="js/bootstrap-image-gallery.min.js"></script>
   </body>
 
 </html>
