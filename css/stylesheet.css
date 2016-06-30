@@ -1,5 +1,5 @@
 body{
-  background #222222
+  background: #222222;
 }
 
 h1{
@@ -15,7 +15,7 @@ h1{
 img {
   display: block;
   margin: auto;
-  max-width: 90%
+  max-width: 90%;
 }
 
 #header{
