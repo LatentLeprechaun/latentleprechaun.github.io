@@ -43,9 +43,12 @@ img {
 
 #footer{
   min-height: 4%;
-  font-size: 9px;
-  color: #AAEEAA;
-  position: relative;
-  bottom: -20px;
-  clear: both;
+  font-size: 12px;
+  font-style: Tahoma, Geneva, monospace;
+  color: #999;
+  background-color: rgba(10,10,10,0.45);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
