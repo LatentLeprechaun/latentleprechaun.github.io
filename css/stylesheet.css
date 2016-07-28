@@ -42,7 +42,7 @@ img {
 }
 
 #footer{
-  min-height: 4%;
+  min-height: 16px;
   font-size: 12px;
   padding: 4px;
   font-style: Tahoma, Geneva, monospace;
