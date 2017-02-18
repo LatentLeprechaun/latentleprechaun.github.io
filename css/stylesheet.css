@@ -1,3 +1,11 @@
+/*REMEMBER TO CTRL-SHIFT-DELETE TO CLEAR THE CACHE ON CHROME!*/
+
+/*!!!!MAKE THIS A PROPER ID LATER!!!!*/
+audio {
+  width:100%;
+  border-radius: 4px;
+}
+
 noscript {
   background: #7DD;
 }
@@ -21,6 +29,24 @@ p{
   font-family: Tahoma, Geneva, sans-serif;
   /*text-align: center;*/
   color: #333;
+}
+
+#emailHideBox {
+  display: inline-block;
+  background: #88F;
+  color: #FFF;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+/*BETTER WAY TO DO THIS?*/
+#profileVoiceoverImg {
+  border-radius: 100%;
+  border: 5px solid #AAA;
+  width: 150px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 #navWindow{
@@ -102,6 +128,16 @@ p{
   right: 0;
 }
 
+#tagsPanel{
+  background: #D7D7D7;
+  width: 100%;
+  padding: 0.2em;
+}
+
+.InlineBlockDisplay {
+  display: inline-block;
+}
+
 .content{
   background: #EEE;
   max-height: 100%;
@@ -111,6 +147,47 @@ p{
   font-size: 1.2em;
   text-align: left;
   line-height: 1.4em;
+}
+
+#artContentPanel{
+  text-align: center;
+}
+
+.galleryImage{
+  height: 300px;
+  width: auto;
+  margin: 0.2em;
+  display: inline-block;
+}
+
+.galleryImage:hover{
+  opacity: 0.2;
+  box-shadow: 0 0 15px black;
+  width: 100%;
+  height: auto;
+}
+
+.imageTags{
+  background: #DDD;
+  padding: 0.6em;
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+  font-size: 0.8em;
+  text-align: center;
+  color: #222;
+  display: inline-block;
+  margin: 0.3em;
+  border-radius: 0.3em;
+}
+
+.imageTags:hover{
+  background: #EEE;
+}
+
+/*In order for this to work, I need to make the main image a background.*/
+.galleryImageMag{
+  width: 100%;
+  height: auto;
 }
 
 @media screen and (max-width: 825px){
