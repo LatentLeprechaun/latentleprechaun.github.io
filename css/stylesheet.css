@@ -49,7 +49,7 @@ p{
   margin: 0 auto;
 }
 
-#navWindow{
+.navWindow{
   background: #E1E1E1;
   width: 100%;
   display: -webkit-flex;
@@ -61,7 +61,7 @@ p{
   /*flex-wrap: wrap;*/
 }
 
-#navWindow .navItem{
+.navWindow .navItem{
   min-width: 15%;
   display: flex;
   flex: 1;
@@ -78,12 +78,12 @@ p{
   box-shadow: 0 0 10px #BBB;
 }
 
-#navWindow .navItem:hover{
+.navWindow .navItem:hover{
   background: #FFF;
   flex: 1.2;
 }
 
-#navWindow .navItem img{
+.navWindow .navItem img{
   margin: auto;
   margin-bottom: 10px;
   margin-top: 10px;
@@ -191,11 +191,11 @@ p{
 }
 
 @media screen and (max-width: 825px){
-  #navWindow{
+  .navWindow{
     flex-wrap: wrap;
     flex: 1;
   }
-  #navWindow .navItem{
+  .navWindow .navItem{
     min-width: 30%;
     font-size: 1.1em;
   }
