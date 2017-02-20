@@ -12,7 +12,8 @@ noscript {
 
 body{
   /*background: #DDD;*/
-  background: #AFE0A0;
+  /*background: #AFE0A0;*/
+  background: white;
   width: 100vw;
   margin: 0;
   padding: 0;
@@ -147,6 +148,7 @@ p{
   font-size: 1.2em;
   text-align: left;
   line-height: 1.4em;
+  min-height: 80vh;
 }
 
 #artContentPanel{
@@ -190,7 +192,7 @@ p{
   height: auto;
 }
 
-@media handheld, screen and (max-width: 850px){
+@media handheld, screen and (max-width: 950px){
   .navWindow{
     flex-wrap: wrap;
     flex: 1;
