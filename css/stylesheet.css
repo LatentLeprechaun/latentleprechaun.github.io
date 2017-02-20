@@ -198,7 +198,7 @@ p{
     flex: 1;
   }
   .navWindow .navItem{
-    min-width: 30%;
+    flex: 1 1 30%;
     font-size: 1.1em;
   }
   #header{
