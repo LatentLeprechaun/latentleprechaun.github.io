@@ -65,7 +65,7 @@ p{
 .navWindow .navItem{
   min-width: 15%;
   display: flex;
-  flex: 1;
+  flex: 1 1;
   text-decoration: none;
   flex-direction: column;
   justify-content: space-around;
@@ -81,7 +81,7 @@ p{
 
 .navWindow .navItem:hover{
   background: #FFF;
-  flex: 1.2;
+  flex: 2 1;
 }
 
 .navWindow .navItem img{
@@ -198,7 +198,7 @@ p{
     flex: 1;
   }
   .navWindow .navItem{
-    flex: 1 1 30%;
+    flex: 0.2 0.2 30%;
     font-size: 1.1em;
   }
   #header{
