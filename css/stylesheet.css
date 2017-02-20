@@ -204,6 +204,10 @@ p{
   #header{
     font-size: 50%;
   }
+  .navWindow .navItem:hover{
+    background: #FFF;
+    flex-grow: 1;
+  }
   .content{
     margin: -1em 2em -1em 2em;
     padding: 2em 1em 2em 1em;
