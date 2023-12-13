@@ -1,5 +1,37 @@
 /*REMEMBER TO CTRL-SHIFT-DELETE TO CLEAR THE CACHE ON CHROME!*/
 
+/*
+TO DO LIST:
+-Add a dark mode
+-Find out if you can make a css color filter into a variable
+-Edit navbar with proper naming schemes
+-Why do I still have -webkit-flex in my code? Reason?
+-Make menu buttons not overlap each other with box shadow
+*/
+
+/*Possible color palette for dark mode:
+Dark grey: #040106
+Cream color: #ddc691
+Subtle green: #49ac51
+*/
+
+/*alternate pallette:
+#05141a
+#d7d4d1
+#fd583c
+#857139
+*/
+
+/*Common values defined into variables*/
+:root {
+  --dark-color: #040106;
+  --dark-upshade-color: #0a030f;
+
+  --accent-color: #49ac51;
+
+  --main-color: #ddc691;
+}
+
 /*!!!!MAKE THIS A PROPER ID LATER!!!!*/
 audio {
   width:100%;
@@ -12,23 +44,24 @@ noscript {
 
 body{
   /*background: #DDD;*/
-  background: #AFE0A0;
-  width: 100vw;
+  /*background: #AFE0A0;*/
+  background: var(--dark-color);
+  width: 100dvw;
   margin: 0;
   padding: 0;
+  color: var(--dark-color);
 }
 
 h3{
   font-family: Tahoma, Geneva, sans-serif;
   text-align: center;
   font-weight: bold;
-  color: #333;
+  color: var(--dark-color);
 }
 
 p{
   font-family: Tahoma, Geneva, sans-serif;
-  /*text-align: center;*/
-  color: #333;
+  /*text-align: center;*/;
 }
 
 #emailHideBox {
@@ -49,11 +82,14 @@ p{
   margin: 0 auto;
 }
 
-#navWindow{
-  background: #E1E1E1;
-  width: 100%;
-  display: -webkit-flex;
+
+.navWindow{
+  background: var(--main-color);
+  height: auto;
   display: flex;
+  padding-left: 10%;
+  padding-right: 10%;
+  box-shadow: 0 0 10px var(--dark-color);
   justify-content: center;
   /*justify-content: space-around;*/
   flex-direction: row;
@@ -61,21 +97,22 @@ p{
   /*flex-wrap: wrap;*/
 }
 
-#navWindow .navItem{
-  min-width: 15%;
+
+.navWindow .navItem{
+  min-width: 4rem;
   display: flex;
   flex: 1;
   text-decoration: none;
   flex-direction: column;
-  justify-content: space-around;
-  margin: 2px;
-  background: #EEE;
-  height: 6em;
+  justify-content: space-evenly;
+  margin: 0px;
+  background: var(--main-color);
+  height: 5rem;
   text-align: center;
   font-family: 'Muli', sans-serif;
-  font-size: 1.5em;
-  color: #333;
-  box-shadow: 0 0 10px #BBB;
+  font-size: 1rem;
+  color: var(--accent-color);
+  transition: flex 50ms ease-in, background 50ms ease-in;
 }
 
 #navWindow .navItem:hover{
@@ -87,9 +124,10 @@ p{
   margin: auto;
   margin-bottom: 10px;
   margin-top: 10px;
-  height: 80px;
+  height: 2rem;
   width: auto;
   display: block;
+  filter: brightness(0%) saturate(100%) invert(54%) sepia(55%) saturate(486%) hue-rotate(74deg) brightness(95%) contrast(87%);
 }
 
 #header{
@@ -139,9 +177,9 @@ p{
 }
 
 .content{
-  background: #EEE;
+  background: var(--main-color);
   max-height: 100%;
-  margin: -1em 8em -1em 8em;
+  margin: 0 8em 0 8em;
   padding: 7em 3em 7em 3em;
   font-family: Tahoma, Geneva, sans-serif;
   font-size: 1.2em;

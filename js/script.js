@@ -133,7 +133,7 @@ init = function(pageLocID) {
     }
   };
 
-  //Concatenates all the tags in the imageDB to one array. Iz magic. HIGH POTENTIAL FOR BREAKING THINGS TERRIBLY.
+  //Concatenates all the tags in the imageDB to one array. Iz magic. HIGH POTENTIAL FOR BREAKING THINGS TERRIBLY. Broken window that needs fixing.
   var getTags = function() {
     for(x of imageDB) {
       for(i of x.tags) {
