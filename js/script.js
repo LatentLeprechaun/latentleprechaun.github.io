@@ -173,17 +173,16 @@ init = function(pageLocID) {
     //Hacky code alert
     //Sets up the tags
     getTags();
-    for (incre of iTags) {
-      var n = document.createElement("div");
-      n.className = "imageTags";
-      n.id = "imageTagI" + iTags.indexOf(incre);
-      n.innerHTML = incre;
-      document.getElementById('tagsPanel').appendChild(n);
+    iTags.forEach(function (uniqueTag, i) {
+      var tagTag = document.createElement("div");
+      tagTag.className = "imageTags";
+      tagTag.id = "imageTagI_" + i;
+      tagTag.textContent = uniqueTag;
+      document.getElementById('tagsPanel').appendChild(tagTag);
       //I don't know what is going on here. Incre keeps pointing to the very last tag. It refuses to iterate.
       //This one keeps getting index 20
-      document.getElementById('imageTagI' + iTags.indexOf(incre)).onclick = function() { return setFilter(incre); };
-      //this.n.onclick = function() { setFilter(incre); };
-    };
+      tagTag.addEventListener('click', function () { setFilter(uniqueTag) })
+    })
     //for (i of iTags) {
       //This one keeps using index 10
       //document.getElementById('imageTagI' + iTags.indexOf(i)).onclick = function() { console.log(i); };;
