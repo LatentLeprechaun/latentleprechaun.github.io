@@ -9,6 +9,11 @@ TO DO LIST:
 -Make menu buttons not overlap each other with box shadow
 */
 
+/*Two color basic monochrome palette
+Almost white: #f9f1ed
+Dark gray: #282726
+*/
+
 /*Possible color palette for dark mode:
 Dark grey: #040106
 Cream color: #ddc691
@@ -24,12 +29,13 @@ Subtle green: #49ac51
 
 /*Common values defined into variables*/
 :root {
-  --dark-color: #040106;
-  --dark-upshade-color: #0a030f;
+  --off-white: #f9f1ed;
 
-  --accent-color: #49ac51;
+  --dark-slate-upshade: #393837;
 
-  --main-color: #ddc691;
+  --muted-green: #49ac51;
+
+  --dark-slate: #282726;
 }
 
 /*!!!!MAKE THIS A PROPER ID LATER!!!!*/
@@ -45,18 +51,18 @@ noscript {
 body{
   /*background: #DDD;*/
   /*background: #AFE0A0;*/
-  background: var(--dark-color);
+  background: var(--off-white);
   width: 100dvw;
   margin: 0;
   padding: 0;
-  color: var(--dark-color);
+  color: var(--dark-slate);
 }
 
 h3{
   font-family: Tahoma, Geneva, sans-serif;
   text-align: center;
   font-weight: bold;
-  color: var(--dark-color);
+  color: var(--dark-slate);
 }
 
 p{
@@ -83,12 +89,12 @@ p{
 }
 
 .navWindow{
-  background: var(--main-color);
+  background: var(--dark-slate);
   height: auto;
   display: flex;
   padding-left: 10%;
   padding-right: 10%;
-  box-shadow: 0 0 10px var(--dark-color);
+  box-shadow: 0 0 10px var(--off-white);
   justify-content: center;
   /*justify-content: space-around;*/
   flex-direction: row;
@@ -104,18 +110,19 @@ p{
   flex-direction: column;
   justify-content: space-evenly;
   margin: 0px;
-  background: var(--main-color);
+  background: var(--dark-slate);
   height: 5rem;
   text-align: center;
   font-family: 'Muli', sans-serif;
   font-size: 1rem;
-  color: var(--accent-color);
+  color: var(--muted-green);
   transition: flex 50ms ease-in, background 50ms ease-in;
 }
 
 .navWindow .navItem:hover{
-  background: #FFF;
+  background: var(--off-white);
   flex: 2 1;
+  color: var(--dark-slate);
 }
 
 .navWindow .navItem img{
@@ -175,10 +182,10 @@ p{
 }
 
 .content{
-  background: var(--main-color);
+  background: var(--off-white);
   max-height: 100%;
-  margin: 0 8em 0 8em;
-  padding: 7em 3em 7em 3em;
+  width: auto;
+  padding: 7em 11em 7em 11em;
   font-family: Tahoma, Geneva, sans-serif;
   font-size: 1.2em;
   text-align: left;
