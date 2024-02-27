@@ -116,7 +116,7 @@ p{
   font-family: 'Muli', sans-serif;
   font-size: 1rem;
   color: var(--muted-green);
-  transition: flex 50ms ease-in, background 50ms ease-in;
+  transition: flex 90ms ease-in, background 90ms ease-in, color 90ms ease-in;
 }
 
 .navWindow .navItem:hover{
