@@ -195,20 +195,26 @@ p{
 
 #artContentPanel{
   text-align: center;
+  display: flex;
+  padding: 0 5vw 0 5vw;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 90vw;
+  height: 100vh;
 }
 
 .galleryImage{
-  height: 300px;
-  width: auto;
-  margin: 0.2em;
-  display: inline-block;
+  height: 15vw;
+  align-self: center;
+  background: green;
+  margin: 2rem;
+  flex-grow: 1;
+  transition: height 100ms ease-in, width 100ms ease-in;
 }
 
 .galleryImage:hover{
-  opacity: 0.2;
   box-shadow: 0 0 15px black;
-  width: 100%;
-  height: auto;
+  height: 16vw;
 }
 
 .imageTags{
@@ -231,6 +237,7 @@ p{
 /*In order for this to work, I need to make the main image a background.*/
 .galleryImageMag{
   width: 100%;
+  z-index: 1;
   height: auto;
 }
 

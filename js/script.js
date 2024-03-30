@@ -16,28 +16,6 @@ init = function(pageLocID) {
       // },
 
       {
-
-        name: "Annoyed Guy",
-        description: "Just an annoyed guy. Not much else to it.",
-        fileName: "AnnoyedGuy(WIP).jpg",
-        tags: ["character", "beard", "fantasy", "portrait", "digital", "2D", "2016"]
-      },
-
-      {
-        name: "Arabian Sword Mage",
-        description: "This is an arabian sword mage woman alien thingy. So, yeah.",
-        fileName: "ArabianSwordMage.png",
-        tags: ["character", "digital", "fantasy", "2D", "2016"]
-      },
-
-      {
-        name: "Hedgehog in a Tree",
-        description: "A hedgehog in a tree.",
-        fileName: "hedgehogtree.jpg",
-        tags: ["nature", "animal", "pencil", "cute", "traditional", "sketch", "2D", "2015"]
-      },
-
-      {
         name: "Praying Mantis Study",
         description: "A praying mantis study.",
         fileName: "prayingMantis.jpg",
@@ -58,6 +36,13 @@ init = function(pageLocID) {
         tags: ["portrait", "pencil", "human", "traditional", "2D", "2016"]
       },
 
+      {
+        name: "Airship Concept",
+        description: "An airship concept I drew.",
+        fileName: "SpaceshipConcept.png",
+        tags: ["concept", "vehicle", "digital", "sci-fi", "2D", "2016"]
+      },
+
   // a repeat for testing purposes
       {
         name: "Airship Concept",
@@ -67,31 +52,24 @@ init = function(pageLocID) {
       },
 
       {
-        name: "Annoyed Guy",
-        description: "Just an annoyed guy. Not much else to it.",
-        fileName: "AnnoyedGuy(WIP).jpg",
-        tags: ["character", "beard", "fantasy", "portrait", "digital", "2016"]
-      },
-
-      {
-        name: "Arabian Sword Mage",
-        description: "This is an arabian sword mage woman alien thingy. So, yeah.",
-        fileName: "ArabianSwordMage.png",
-        tags: ["character", "digital", "fantasy", "2016"]
-      },
-
-      {
-        name: "Hedgehog in a Tree",
-        description: "A hedgehog in a tree.",
-        fileName: "hedgehogtree.jpg",
-        tags: ["nature", "animal", "pencil", "cute", "traditional", "sketch", "2015"]
-      },
-
-      {
         name: "Praying Mantis Study",
         description: "A praying mantis study.",
         fileName: "prayingMantis.jpg",
         tags: ["study", "insect", "animal", "nature", "pen", "traditional", "2016"]
+      },
+
+      {
+        name: "Anna Blunck and her Horses",
+        description: "Anna Blunck with her horses. Instagram: @ab.horses",
+        fileName: "AbHorsesDraw.JPG",
+        tags: ["sketch", "pencil", "animal", "human", "traditional", "2D", "2016"]
+      },
+
+      {
+        name: "A Portrait of Erik Orozco",
+        description: "This is a portrait I drew of Erik Orozco. Instagram: @erik_orozco",
+        fileName: "ErikOrozcoDraw.png",
+        tags: ["portrait", "pencil", "human", "traditional", "2D", "2016"]
       }
 
     ];
@@ -188,6 +166,10 @@ init = function(pageLocID) {
       //document.getElementById('imageTagI' + iTags.indexOf(i)).onclick = function() { console.log(i); };;
     //}
     //Sets up all the images on the page
+
+
+    //NOTES FOR NEXT SESSION: Make image into a background image so the magnifying glass icon works or maybe make a container that both images can be in
+
     for (i = 0; i <= 9; i++) {
       var x = document.createElement("img");
       //Possibly hacky code here. Check out setAttribute vs. className
@@ -204,7 +186,7 @@ init = function(pageLocID) {
       y.setAttribute("src", "/img/MagnifyingGlass.svg");
       document.getElementById('galleryImage' + i).appendChild(y);
     };
-    document.getElementById('galleryImage3').setAttribute("height", "5000px");
+    console.log(document.getElementById('galleryImageMag3'));
     // var img = new Image();
     // var div = document.getElementById('artContentPanel');
     //
@@ -226,7 +208,7 @@ init = function(pageLocID) {
     var addressHider = document.getElementById('emailHideBox');
     addressHider.innerHTML = "(Mouse over or click)";
     addressHider.onmouseover = function() {
-      addressHider.innerHTML = "latentleprechaun.inquiries@gmail.com";
+      addressHider.innerHTML = "joseph.br.raymond@gmail.com";
     };
     addressHider.onmouseout = function() {
       addressHider.innerHTML = "(Mouse over or click)";
@@ -241,7 +223,7 @@ init = function(pageLocID) {
 
     //STUFF FOR SITE-WIDE JAVASCRIPT STUFF
 
-    console.info('Good day sir! Javascript has been successfully initialized!');
+    console.info('Good day! Javascript has been successfully initialized!');
 
     //------------------------------------
     resetVars();
