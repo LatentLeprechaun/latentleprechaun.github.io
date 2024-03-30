@@ -171,6 +171,14 @@ init = function(pageLocID) {
     //NOTES FOR NEXT SESSION: Make image into a background image so the magnifying glass icon works or maybe make a container that both images can be in
 
     for (i = 0; i <= 9; i++) {
+
+      //Adds a container for the image, so a constant size can be maintained and the magnifying glass icon can be displayed over the image.
+      var c = document.createElement("div");
+      c.className = "galleryImageContainer";
+      c.id = "galleryImageContainer" + i;
+      document.getElementById('artContentPanel').appendChild(c);
+
+      //Adds the actual image element and appends it to the gallery image container.
       var x = document.createElement("img");
       //Possibly hacky code here. Check out setAttribute vs. className
       // x.setAttribute("width", "350px");
@@ -179,12 +187,14 @@ init = function(pageLocID) {
       x.className = "galleryImage";
       x.id = "galleryImage" + i;
       x.setAttribute("src", getImgPath(i, "large"));
-      document.getElementById('artContentPanel').appendChild(x);
+      document.getElementById('galleryImageContainer' + i).appendChild(x);
+
+      //Adds the magnifying glass element and appends it to the gallery image container.
       var y = document.createElement("img");
       y.className = "galleryImageMag";
       y.id = "galleryImageMag" + i;
       y.setAttribute("src", "/img/MagnifyingGlass.svg");
-      document.getElementById('galleryImage' + i).appendChild(y);
+      document.getElementById('galleryImageContainer' + i).appendChild(y);
     };
     console.log(document.getElementById('galleryImageMag3'));
     // var img = new Image();
