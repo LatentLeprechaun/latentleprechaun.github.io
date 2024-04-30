@@ -38,11 +38,6 @@ Subtle green: #49ac51
   --dark-slate: #282726;
 }
 
-/*!!!!MAKE THIS A PROPER ID LATER!!!!*/
-audio {
-  width:100%;
-  border-radius: 4px;
-}
 
 noscript {
   background: #7DD;
@@ -86,6 +81,11 @@ p{
   height: auto;
   display: block;
   margin: 0 auto;
+}
+
+#voiceOverDemo {
+  width:100%;
+  border-radius: 4px;
 }
 
 .navWindow{
@@ -203,18 +203,22 @@ p{
   height: 100vh;
 }
 
+.galleryImageContainer {
+  position: relative;
+}
+
 .galleryImage{
-  height: 15vw;
+  height: 20rem;
   align-self: center;
   background: green;
-  margin: 2rem;
+  margin: 0.2rem;
   flex-grow: 1;
-  transition: height 100ms ease-in, width 100ms ease-in;
+  transition: height 200ms ease-in, width 200ms ease-in;
 }
 
 .galleryImage:hover{
   box-shadow: 0 0 15px black;
-  height: 16vw;
+  height: 21rem;
 }
 
 .imageTags{
@@ -234,9 +238,12 @@ p{
   background: #EEE;
 }
 
-/*Need to make this float above the gallery image*/
 .galleryImageMag{
-  width: 10%;
+  width: 2rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  pointer-events: none;
   z-index: 1;
   height: auto;
 }
