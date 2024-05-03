@@ -229,7 +229,8 @@ p{
   font-size: 0.8em;
   text-align: center;
   color: #222;
-  display: inline-block;
+  display: inline-flex;
+  justify-content: space-between;
   margin: 0.3em;
   border-radius: 0.3em;
 }
