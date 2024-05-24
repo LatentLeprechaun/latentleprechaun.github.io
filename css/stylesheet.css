@@ -203,6 +203,27 @@ p{
   height: 100vh;
 }
 
+#galleryPopupContainer{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+#galleryPopupExit{
+  position: fixed;
+  top: 1vw;
+  right: 1vw;
+  width: 5vw;
+  height: 5vw;
+  background: black;
+  box-shadow: 0 0 10px black;
+  border-radius: 100%;
+  justify-content: center;
+}
+
 .galleryImageContainer {
   position: relative;
 }

@@ -1,142 +1,12 @@
 init = function(pageLocID) {
-  var iTags = [];
-  var imageDB = [];
-  var resetVars = function () {
-    // Look up JSON files for this database
-    // make getter functions
-    // look at angularjs
-    iTags = [];
-    imageDB = [
 
-      // {
-      //   name: "",
-      //   description: "",
-      //   fileName: "",
-      //   tags: []
-      // },
 
-      {
-        name: "Praying Mantis Study",
-        description: "A praying mantis study.",
-        fileName: "prayingMantis.jpg",
-        tags: ["study", "insect", "animal", "nature", "pen", "traditional", "2D", "2016"]
-      },
-
-      {
-        name: "Anna Blunck and her Horses",
-        description: "Anna Blunck with her horses. Instagram: @ab.horses",
-        fileName: "AbHorsesDraw.JPG",
-        tags: ["sketch", "pencil", "animal", "human", "traditional", "2D", "2016"]
-      },
-
-      {
-        name: "A Portrait of Erik Orozco",
-        description: "This is a portrait I drew of Erik Orozco. Instagram: @erik_orozco",
-        fileName: "ErikOrozcoDraw.png",
-        tags: ["portrait", "pencil", "human", "traditional", "2D", "2016"]
-      },
-
-      {
-        name: "Airship Concept",
-        description: "An airship concept I drew.",
-        fileName: "SpaceshipConcept.png",
-        tags: ["concept", "vehicle", "digital", "sci-fi", "2D", "2016"]
-      },
-
-  // a repeat for testing purposes
-      {
-        name: "Airship Concept",
-        description: "An airship concept I drew.",
-        fileName: "SpaceshipConcept.png",
-        tags: ["concept", "vehicle", "digital", "sci-fi", "2D", "2016"]
-      },
-
-      {
-        name: "Praying Mantis Study",
-        description: "A praying mantis study.",
-        fileName: "prayingMantis.jpg",
-        tags: ["study", "insect", "animal", "nature", "pen", "traditional", "2016"]
-      },
-
-      {
-        name: "Anna Blunck and her Horses",
-        description: "Anna Blunck with her horses. Instagram: @ab.horses",
-        fileName: "AbHorsesDraw.JPG",
-        tags: ["sketch", "pencil", "animal", "human", "traditional", "2D", "2016"]
-      },
-
-      {
-        name: "A Portrait of Erik Orozco",
-        description: "This is a portrait I drew of Erik Orozco. Instagram: @erik_orozco",
-        fileName: "ErikOrozcoDraw.png",
-        tags: ["portrait", "pencil", "human", "traditional", "2D", "2016"]
-      }
-
-    ];
-    console.info('Variables and image database reset');
-  };
-
-  //Function that redraws elements so that the css rules actually get applied to them.
-  //Doesn't seem to actually work.
-  // function redraw(elem) {
-  //   var n = document.createTextNode(' ');
-  //   elem.aappendChild(n);
-  //   setTimeout(function(){ n.parentNode.removeChild(n) }, 0);
-  //   return elem;
-  // }
-
-  //Function for finding duplicates in a string with an argument
-  var lookUpDupli = function(searchArray, searchFor) {
-    var i;
-    for (i of searchArray) {
-      if (i == searchFor) {
-        //console.log("lookUpDupli exited true with a match of: " + i + " = " + searchFor);
-        return true;
-      }
-    };
-    //console.log("lookUpDupli exited false without finding a match. Last comparison: " + i + " = " + searchFor);
-    return false;
-  };
-
-  //Function for building the image path from the imageDB using the arguments of location(within the database array) and size for specifying whether it should be thumbnail or large.
-  var getImgPath = function(loc, size) {
-    console.info("Loading image " + loc);
-    if (size === "large") {
-      return "/images/" + imageDB[loc].fileName;
-    } else if (size === "thumbnail") {
-      return "/images/thumbnails" + imageDB[loc].fileName;
-    } else {
-      console.error("getImgPath(" + loc + ", " + size + ") is having problems.");
-      return false;
-    }
-  };
-
-  //Concatenates all the tags in the imageDB to one array. Iz magic. HIGH POTENTIAL FOR BREAKING THINGS TERRIBLY. Broken window that needs fixing.
-  var getTags = function() {
-    for(x of imageDB) {
-      for(i of x.tags) {
-        if (iTags.length == 0){
-          iTags.push(i);
-        };
-        if (!lookUpDupli(iTags, i)) {
-          iTags.push(i);
-        };
-      };
-    };
-    // for (n of iTags) {
-    //   if( n == null ) {
-    //     console.error("There is nothing in iTags to print!");
-    //   } else {
-    //     console.log("There is a " + n + " INDEX NUM: " + iTags.indexOf(n));
-    //   };
-    // };
-  };
-
-  var indexInit = function() {    console.log(iTags[4]);
-    console.log(iTags[23]);
+  //----- MAIN PAGE SCRIPTS -----
+  var indexInit = function() {
     console.info("Page location should be index: " + document.location.origin + document.location.pathname);
   };
 
+  //----- CODE PAGE SCRIPTS -----
   var codeThingsInit = function() {
     console.info("Page location should be code-things: " + document.location.origin + document.location.pathname);
   };
@@ -146,8 +16,160 @@ init = function(pageLocID) {
     console.log("The tag is: " + tagname);
   };
 
+
+
+  //----- ART PAGE SCRIPTS -----
   var artThingsInit = function() {
     console.info("Page location should be art-things: " + document.location.origin + document.location.pathname);
+
+
+    //Image Database and Tag functions
+    var iTags = [];
+    var imageDB = [];
+    var resetVars = function () {
+      // Look up JSON files for this database
+      // make getter functions
+      // look at angularjs
+      iTags = [];
+      imageDB = [
+
+        // {
+        //   name: "",
+        //   description: "",
+        //   fileName: "",
+        //   tags: []
+        // },
+
+        {
+          name: "Praying Mantis Study",
+          description: "A praying mantis study.",
+          fileName: "prayingMantis.jpg",
+          tags: ["study", "insect", "animal", "nature", "pen", "traditional", "2D", "2016"]
+        },
+
+        {
+          name: "Anna Blunck and her Horses",
+          description: "Anna Blunck with her horses. Instagram: @ab.horses",
+          fileName: "AbHorsesDraw.JPG",
+          tags: ["sketch", "pencil", "animal", "human", "traditional", "2D", "2016"]
+        },
+
+        {
+          name: "A Portrait of Erik Orozco",
+          description: "This is a portrait I drew of Erik Orozco. Instagram: @erik_orozco",
+          fileName: "ErikOrozcoDraw.png",
+          tags: ["portrait", "pencil", "human", "traditional", "2D", "2016"]
+        },
+
+        {
+          name: "Airship Concept",
+          description: "An airship concept I drew.",
+          fileName: "SpaceshipConcept.png",
+          tags: ["concept", "vehicle", "digital", "sci-fi", "2D", "2016"]
+        },
+
+    // a repeat for testing purposes
+        {
+          name: "Airship Concept",
+          description: "An airship concept I drew.",
+          fileName: "SpaceshipConcept.png",
+          tags: ["concept", "vehicle", "digital", "sci-fi", "2D", "2016"]
+        },
+
+        {
+          name: "Praying Mantis Study",
+          description: "A praying mantis study.",
+          fileName: "prayingMantis.jpg",
+          tags: ["study", "insect", "animal", "nature", "pen", "traditional", "2016"]
+        },
+
+        {
+          name: "Anna Blunck and her Horses",
+          description: "Anna Blunck with her horses. Instagram: @ab.horses",
+          fileName: "AbHorsesDraw.JPG",
+          tags: ["sketch", "pencil", "animal", "human", "traditional", "2D", "2016"]
+        },
+
+        {
+          name: "A Portrait of Erik Orozco",
+          description: "This is a portrait I drew of Erik Orozco. Instagram: @erik_orozco",
+          fileName: "ErikOrozcoDraw.png",
+          tags: ["portrait", "pencil", "human", "traditional", "2D", "2016"]
+        }
+
+      ];
+      console.info('Variables and image database reset');
+    };
+
+    resetVars();
+
+    //Function for finding duplicates in a string with an argument
+    var lookUpDupli = function(searchArray, searchFor) {
+      var i;
+      for (i of searchArray) {
+        if (i == searchFor) {
+          //console.log("lookUpDupli exited true with a match of: " + i + " = " + searchFor);
+          return true;
+        }
+      };
+      //console.log("lookUpDupli exited false without finding a match. Last comparison: " + i + " = " + searchFor);
+      return false;
+    };
+
+    //Function for building the image path from the imageDB using the arguments of location(within the database array) and size for specifying whether it should be thumbnail or large.
+    var getImgPath = function(loc, size) {
+      console.info("Loading image " + loc);
+      if (size === "large") {
+        return "/images/" + imageDB[loc].fileName;
+      } else if (size === "thumbnail") {
+        return "/images/thumbnails" + imageDB[loc].fileName;
+      } else {
+        console.error("getImgPath(" + loc + ", " + size + ") is having problems.");
+        return false;
+      }
+    };
+
+    //Concatenates all the tags in the imageDB to one array. Iz magic. HIGH POTENTIAL FOR BREAKING THINGS TERRIBLY. Broken window that needs fixing.
+    var getTags = function() {
+      for(x of imageDB) {
+        for(i of x.tags) {
+          if (iTags.length == 0){
+            iTags.push(i);
+          };
+          if (!lookUpDupli(iTags, i)) {
+            iTags.push(i);
+          };
+        };
+      };
+      // for (n of iTags) {
+      //   if( n == null ) {
+      //     console.error("There is nothing in iTags to print!");
+      //   } else {
+      //     console.log("There is a " + n + " INDEX NUM: " + iTags.indexOf(n));
+      //   };
+      // };
+    };
+
+
+
+
+
+
+
+
+    //Function that all images call to that pops up the gallery when an image is clicked
+    var galleryPopup = function(imgNum) {
+      var galleryPopupContainer = document.createElement("div");
+      galleryPopupContainer.id = "galleryPopupContainer";
+      document.body.appendChild(galleryPopupContainer);
+      console.log("galleryPopup function completed.");
+      var galleryPopupExit = document.createElement("img");
+      galleryPopupExit.id = "galleryPopupExit";
+      galleryPopupExit.src = "img/exitX.png";
+      galleryPopupExit.addEventListener('click', function() {galleryPopupContainer.remove()});
+      galleryPopupContainer.appendChild(galleryPopupExit);
+    };
+
     //Hacky code alert
     //Sets up the tags
     getTags();
@@ -168,9 +190,7 @@ init = function(pageLocID) {
     //Sets up all the images on the page
 
 
-    //NOTES FOR NEXT SESSION: Make image into a background image so the magnifying glass icon works or maybe make a container that both images can be in
-
-    for (i = 0; i <= 9; i++) {
+    for (i = 0; i <= 8; i++) {
 
       //Adds a container for the image, so a constant size can be maintained and the magnifying glass icon can be displayed over the image.
       var c = document.createElement("div");
@@ -187,6 +207,7 @@ init = function(pageLocID) {
       x.className = "galleryImage";
       x.id = "galleryImage" + i;
       x.setAttribute("src", getImgPath(i, "large"));
+      x.addEventListener('click', function(){galleryPopup(i)});
       document.getElementById('galleryImageContainer' + i).appendChild(x);
 
       //Adds the magnifying glass element and appends it to the gallery image container.
@@ -209,10 +230,17 @@ init = function(pageLocID) {
     // divar.innerHTML = "<img src='/images/Cloudscape.png'/>";
   };
 
+
+
+  //----- VOICEOVER PAGE SCRIPTS -----
   var voiceOversInit = function() {
     console.info("Page location should be voice-overs: " + document.location.origin + document.location.pathname);
   };
 
+
+
+
+  //----- CONTACT PAGE SCRIPTS -----
   var contactInit = function() {
     console.info("Page location should be contact: " + document.location.origin + document.location.pathname);
     var addressHider = document.getElementById('emailHideBox');
@@ -225,6 +253,9 @@ init = function(pageLocID) {
     };
   };
 
+
+
+  //----- WRITING PAGE SCRIPTS -----
   var writingThingsInit = function() {
     console.info("Page location should be writing-things: " + document.location.origin + document.location.pathname + "/n" + imageDB[2].name);
   };
@@ -236,7 +267,7 @@ init = function(pageLocID) {
     console.info('Good day! Javascript has been successfully initialized!');
 
     //------------------------------------
-    resetVars();
+    // Temporarily disabling this: resetVars();
 
     switch(pageLocID){
       case "index":
