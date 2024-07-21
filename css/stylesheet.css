@@ -121,7 +121,7 @@ p{
 
 .navWindow .navItem:hover{
   background: var(--off-white);
-  flex: 2 1;
+  flex: 1.2 1;
   color: var(--dark-slate);
 }
 
