@@ -101,6 +101,7 @@ init = function(pageLocID) {
       console.info('Variables and image database reset');
     };
 
+    console.log("imageDB length = "+imageDB.length);
     resetVars();
 
     //Function for finding duplicates in a string with an argument
@@ -118,7 +119,7 @@ init = function(pageLocID) {
 
     //Function for building the image path from the imageDB using the arguments of location(within the database array) and size for specifying whether it should be thumbnail or large.
     var getImgPath = function(loc, size) {
-      console.info("Loading image " + loc);
+      console.info("getImgPath Loading image " + loc);
       if (size === "large") {
         return "/images/" + imageDB[loc].fileName;
       } else if (size === "thumbnail") {
@@ -151,7 +152,30 @@ init = function(pageLocID) {
     };
 
 
+    // Function to make buttons a little faster to create. Any passthrough variable that is not needed should be declared as null. eventFunc parameter can be any valid value for .addEventListener.
+    // Example: let sideButton = makeSimpleButton("div", document.getElementById("exampleElement"), 'click', function() {event function}, "simpleButton1", null, null);
+    var makeSimpleButton = function(elementKind, parentN, eventFuncType, eventFunc, idN, classN, srcN) {
 
+      let simpleButton = document.createElement(elementKind ? elementKind : "div");
+
+      simpleButton.id = idN ? idN : null;
+
+      simpleButton.className = classN ? classN : null;
+
+      simpleButton.addEventListener(eventFuncType, eventFunc);
+
+      simpleButton.src = srcN ? srcN : null;
+
+      if (parentN) {
+        parentN.appendChild(simpleButton);
+        console.log("parentN value is: " + parentN);
+      } else {
+        console.log("parentN parameter is invalid. Aborting button creation. Value of parentN: " + parentN);
+        return;
+      }
+
+      return simpleButton;
+    };
 
 
 
@@ -159,15 +183,63 @@ init = function(pageLocID) {
 
     //Function that all images call to that pops up the gallery when an image is clicked
     var galleryPopup = function(imgNum) {
+      var galleryPosition = imgNum;
+
+      //Gallery Container Element
       var galleryPopupContainer = document.createElement("div");
       galleryPopupContainer.id = "galleryPopupContainer";
       document.body.appendChild(galleryPopupContainer);
       console.log("galleryPopup function completed.");
+
+      //Gallery Exit Button
       var galleryPopupExit = document.createElement("img");
       galleryPopupExit.id = "galleryPopupExit";
       galleryPopupExit.src = "img/exitX.png";
       galleryPopupExit.addEventListener('click', function() {galleryPopupContainer.remove()});
       galleryPopupContainer.appendChild(galleryPopupExit);
+
+      //Gallery Image
+      var galleryPopupImage = document.createElement("img");
+      galleryPopupImage.className = "galleryPopupImage";
+      galleryPopupImage.src = getImgPath(imgNum, "large");
+      galleryPopupContainer.appendChild(galleryPopupImage);
+      console.log("galleryPopup imgNum = " + imgNum);
+
+      //Gallery Side Button Function
+      var galleryLeftButton = document.createElement("img");
+      galleryLeftButton.className = "galleryNavigationButtons";
+      galleryLeftButton.id = "galleryLeftButton";
+      galleryLeftButton.src = "img/ArrowChevronLeft.svg";
+      //Changes image and prevents imgNum from going negative
+      galleryLeftButton.addEventListener('click', function() {
+        if(imgNum >= 1) {
+          imgNum--;
+          console.log("imageDB length: "+imageDB.length);
+        } else {
+          console.log("Already at image 0");
+        };
+        galleryPopupImage.src = getImgPath(imgNum, "large");
+      });
+      galleryPopupContainer.appendChild(galleryLeftButton);
+
+      var galleryRightButton = makeSimpleButton(
+        "img",
+        galleryPopupContainer,
+        'click',
+        //Changes image and prevents imgNum from surpassing imageDB.length
+        function() {
+          if(imgNum < imageDB.length - 1) {
+            imgNum++;
+          } else {
+            console.log("Already at the end of imageDB: "+imgNum);
+          };
+          galleryPopupImage.src = getImgPath(imgNum, "large")
+        },
+        "galleryRightButton",
+        "galleryNavigationButtons",
+        "img/ArrowChevronRight.svg"
+      );
+
     };
 
     //Hacky code alert
@@ -181,8 +253,8 @@ init = function(pageLocID) {
       document.getElementById('tagsPanel').appendChild(tagTag);
       //I don't know what is going on here. Incre keeps pointing to the very last tag. It refuses to iterate.
       //This one keeps getting index 20
-      tagTag.addEventListener('click', function () { setFilter(uniqueTag) })
-    })
+      tagTag.addEventListener('click', function () { setFilter(uniqueTag) });
+    });
     //for (i of iTags) {
       //This one keeps using index 10
       //document.getElementById('imageTagI' + iTags.indexOf(i)).onclick = function() { console.log(i); };;
@@ -190,7 +262,7 @@ init = function(pageLocID) {
     //Sets up all the images on the page
 
 
-    for (i = 0; i <= 8; i++) {
+    for (let i = 0; i <= 7; i++) {
 
       //Adds a container for the image, so a constant size can be maintained and the magnifying glass icon can be displayed over the image.
       var c = document.createElement("div");
@@ -207,7 +279,9 @@ init = function(pageLocID) {
       x.className = "galleryImage";
       x.id = "galleryImage" + i;
       x.setAttribute("src", getImgPath(i, "large"));
-      x.addEventListener('click', function(){galleryPopup(i)});
+
+      //Look up difference between var and let in regards to loops and inputting the iterator to a function outside the scope.
+      x.addEventListener('click', function () { galleryPopup(i) });
       document.getElementById('galleryImageContainer' + i).appendChild(x);
 
       //Adds the magnifying glass element and appends it to the gallery image container.

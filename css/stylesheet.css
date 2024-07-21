@@ -177,6 +177,26 @@ p{
   padding: 0.2em;
 }
 
+.galleryNavigationButtons {
+  position: absolute;
+  padding: 1rem;
+  color: white;
+  width: 6%;
+  height: auto;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 100%;
+}
+
+#galleryLeftButton {
+  top: 50%;
+  left: 0;
+}
+
+#galleryRightButton {
+  top: 50%;
+  right: 0;
+}
+
 .InlineBlockDisplay {
   display: inline-block;
 }
@@ -205,11 +225,15 @@ p{
 
 #galleryPopupContainer{
   position: fixed;
+  display: flex;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
 }
 
 #galleryPopupExit{
@@ -222,6 +246,10 @@ p{
   box-shadow: 0 0 10px black;
   border-radius: 100%;
   justify-content: center;
+}
+
+.galleryPopupImage {
+  height: 90vh;
 }
 
 .galleryImageContainer {
