@@ -214,11 +214,11 @@ init = function(pageLocID) {
       galleryLeftButton.addEventListener('click', function() {
         if(imgNum >= 1) {
           imgNum--;
+          galleryPopupImage.src = getImgPath(imgNum, "large");
           console.log("imageDB length: "+imageDB.length);
         } else {
           console.log("Already at image 0");
         };
-        galleryPopupImage.src = getImgPath(imgNum, "large");
       });
       galleryPopupContainer.appendChild(galleryLeftButton);
 
@@ -230,10 +230,10 @@ init = function(pageLocID) {
         function() {
           if(imgNum < imageDB.length - 1) {
             imgNum++;
+            galleryPopupImage.src = getImgPath(imgNum, "large");
           } else {
             console.log("Already at the end of imageDB: "+imgNum);
           };
-          galleryPopupImage.src = getImgPath(imgNum, "large")
         },
         "galleryRightButton",
         "galleryNavigationButtons",
@@ -283,15 +283,7 @@ init = function(pageLocID) {
       //Look up difference between var and let in regards to loops and inputting the iterator to a function outside the scope.
       x.addEventListener('click', function () { galleryPopup(i) });
       document.getElementById('galleryImageContainer' + i).appendChild(x);
-
-      //Adds the magnifying glass element and appends it to the gallery image container.
-      var y = document.createElement("img");
-      y.className = "galleryImageMag";
-      y.id = "galleryImageMag" + i;
-      y.setAttribute("src", "/img/MagnifyingGlass.svg");
-      document.getElementById('galleryImageContainer' + i).appendChild(y);
     };
-    console.log(document.getElementById('galleryImageMag3'));
     // var img = new Image();
     // var div = document.getElementById('artContentPanel');
     //

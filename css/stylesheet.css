@@ -178,6 +178,7 @@ p{
 }
 
 .galleryNavigationButtons {
+  z-index: 1;
   position: absolute;
   padding: 1rem;
   color: white;
@@ -224,6 +225,7 @@ p{
 }
 
 #galleryPopupContainer{
+  z-index: 1;
   position: fixed;
   display: flex;
   top: 0;
@@ -237,6 +239,7 @@ p{
 }
 
 #galleryPopupExit{
+  z-index: 1;
   position: fixed;
   top: 1vw;
   right: 1vw;
@@ -249,6 +252,7 @@ p{
 }
 
 .galleryPopupImage {
+  z-index: 1;
   height: 90vh;
 }
 
@@ -286,16 +290,6 @@ p{
 
 .imageTags:hover{
   background: #EEE;
-}
-
-.galleryImageMag{
-  width: 2rem;
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  pointer-events: none;
-  z-index: 1;
-  height: auto;
 }
 
 
