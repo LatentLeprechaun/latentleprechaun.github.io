@@ -25,13 +25,13 @@ init = function(pageLocID) {
 
     //Image Database and Tag functions
     var iTags = [];
-    var imageDB = [];
+    var artDB = [];
     var resetVars = function () {
       // Look up JSON files for this database
       // make getter functions
       // look at angularjs
       iTags = [];
-      imageDB = [
+      artDB = [
 
         // {
         //   name: "",
@@ -101,7 +101,7 @@ init = function(pageLocID) {
       console.info('Variables and image database reset');
     };
 
-    console.log("imageDB length = "+imageDB.length);
+    console.log("artDB length = "+artDB.length);
     resetVars();
 
     //Function for finding duplicates in a string with an argument
@@ -117,22 +117,22 @@ init = function(pageLocID) {
       return false;
     };
 
-    //Function for building the image path from the imageDB using the arguments of location(within the database array) and size for specifying whether it should be thumbnail or large.
+    //Function for building the image path from the artDB using the arguments of location(within the database array) and size for specifying whether it should be thumbnail or large.
     var getImgPath = function(loc, size) {
       console.info("getImgPath Loading image " + loc);
       if (size === "large") {
-        return "/images/" + imageDB[loc].fileName;
+        return "/images/" + artDB[loc].fileName;
       } else if (size === "thumbnail") {
-        return "/images/thumbnails" + imageDB[loc].fileName;
+        return "/images/thumbnails" + artDB[loc].fileName;
       } else {
         console.error("getImgPath(" + loc + ", " + size + ") is having problems.");
         return false;
       }
     };
 
-    //Concatenates all the tags in the imageDB to one array. Iz magic. HIGH POTENTIAL FOR BREAKING THINGS TERRIBLY. Broken window that needs fixing.
+    //Concatenates all the tags in the artDB to one array. HIGH POTENTIAL FOR BREAKING THINGS TERRIBLY. Needs to be reworked.
     var getTags = function() {
-      for(x of imageDB) {
+      for(x of artDB) {
         for(i of x.tags) {
           if (iTags.length == 0){
             iTags.push(i);
@@ -152,27 +152,16 @@ init = function(pageLocID) {
     };
 
 
-    // Function to make buttons a little faster to create. Any passthrough variable that is not needed should be declared as null. eventFunc parameter can be any valid value for .addEventListener.
-    // Example: let sideButton = makeSimpleButton("div", document.getElementById("exampleElement"), 'click', function() {event function}, "simpleButton1", null, null);
-    var makeSimpleButton = function(elementKind, parentN, eventFuncType, eventFunc, idN, classN, srcN) {
+    // Function to make elements a little faster to create with less code. Any passthrough variable that is not needed should be declared as null.
+    // Example: let sideButton = makeSimpleButton("div", "simpleButton1", "buttonClass");
+    // Returns an element object
+    var makeSimpleElem = function(elementKind, idN, classN) {
 
-      let simpleButton = document.createElement(elementKind ? elementKind : "div");
+      let simpleElement = document.createElement(elementKind ? elementKind : "div");
 
       simpleButton.id = idN ? idN : null;
 
       simpleButton.className = classN ? classN : null;
-
-      simpleButton.addEventListener(eventFuncType, eventFunc);
-
-      simpleButton.src = srcN ? srcN : null;
-
-      if (parentN) {
-        parentN.appendChild(simpleButton);
-        console.log("parentN value is: " + parentN);
-      } else {
-        console.log("parentN parameter is invalid. Aborting button creation. Value of parentN: " + parentN);
-        return;
-      }
 
       return simpleButton;
     };
@@ -210,35 +199,32 @@ init = function(pageLocID) {
       galleryLeftButton.className = "galleryNavigationButtons";
       galleryLeftButton.id = "galleryLeftButton";
       galleryLeftButton.src = "img/ArrowChevronLeft.svg";
-      //Changes image and prevents imgNum from going negative
+      //Changes image and prevents imgNum from going outside the range of where the images are stored in artDB.
       galleryLeftButton.addEventListener('click', function() {
         if(imgNum >= 1) {
           imgNum--;
           galleryPopupImage.src = getImgPath(imgNum, "large");
-          console.log("imageDB length: "+imageDB.length);
+          console.log("artDB length: "+artDB.length);
         } else {
           console.log("Already at image 0");
         };
       });
       galleryPopupContainer.appendChild(galleryLeftButton);
 
-      var galleryRightButton = makeSimpleButton(
-        "img",
-        galleryPopupContainer,
-        'click',
-        //Changes image and prevents imgNum from surpassing imageDB.length
+      var galleryRightButton = makeSimpleElem("img", "galleryRightButton", "galleryNavigationButtons");
+      galleryRightButton.src = "img/ArrowChevronRight.svg";
+      galleryRightButton.addEventListener('click',
+        //Changes image and prevents imgNum from surpassing the range of where images are stored in artDB
         function() {
-          if(imgNum < imageDB.length - 1) {
+          if(imgNum < artDB.length - 1) {
             imgNum++;
             galleryPopupImage.src = getImgPath(imgNum, "large");
           } else {
-            console.log("Already at the end of imageDB: "+imgNum);
+            console.log("Already at the end of artDB: "+imgNum);
           };
-        },
-        "galleryRightButton",
-        "galleryNavigationButtons",
-        "img/ArrowChevronRight.svg"
+        };
       );
+      galleryRightButton.appendChild(galleryPopupContainer);
 
     };
 
@@ -323,7 +309,7 @@ init = function(pageLocID) {
 
   //----- WRITING PAGE SCRIPTS -----
   var writingThingsInit = function() {
-    console.info("Page location should be writing-things: " + document.location.origin + document.location.pathname + "/n" + imageDB[2].name);
+    console.info("Page location should be writing-things: " + document.location.origin + document.location.pathname + "/n" + artDB[2].name);
   };
 
   startPageInit = function(pageloc) {
