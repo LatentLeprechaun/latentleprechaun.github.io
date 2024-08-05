@@ -26,7 +26,7 @@ init = function(pageLocID) {
     //Image Database and Tag functions
     var iTags = [];
     var artDB = [];
-    var resetVars = function () {
+    var initializeVars = function () {
       // Look up JSON files for this database
       // make getter functions
       // look at angularjs
@@ -98,11 +98,11 @@ init = function(pageLocID) {
         }
 
       ];
-      console.info('Variables and image database reset');
+      console.info('Variables and image database initialized');
     };
 
     console.log("artDB length = "+artDB.length);
-    resetVars();
+    initializeVars();
 
     //Function for finding duplicates in a string with an argument
     var lookUpDupli = function(searchArray, searchFor) {
@@ -142,13 +142,6 @@ init = function(pageLocID) {
           };
         };
       };
-      // for (n of iTags) {
-      //   if( n == null ) {
-      //     console.error("There is nothing in iTags to print!");
-      //   } else {
-      //     console.log("There is a " + n + " INDEX NUM: " + iTags.indexOf(n));
-      //   };
-      // };
     };
 
 
@@ -159,11 +152,32 @@ init = function(pageLocID) {
 
       let simpleElement = document.createElement(elementKind ? elementKind : "div");
 
-      simpleButton.id = idN ? idN : null;
+      simpleElement.id = idN ? idN : null;
 
-      simpleButton.className = classN ? classN : null;
+      simpleElement.className = classN ? classN : null;
 
-      return simpleButton;
+      return simpleElement;
+    };
+
+
+    //Function that takes a number, a value to add to the number, and a lower value and higher value to specify a range.
+    //Adds addVal to origVal as long is it doesn't exceed the range.
+    //Range inclusive. Returns an object with the sum of origVal+addVal and a boolean value specifying whether requested summation is within bounds.
+    //Example: aggregateWithinBounds(-4, 10, numberToAddTo, 1);
+    var aggregateWithinBounds = function(rangeOne, rangeTwo, origVal, addVal) {
+      //Throws error if rangeOne isn't less than rangeTwo.
+      if(rangeOne < rangeTwo){
+        if (origVal + addVal >= rangeOne && origVal + addVal <= rangeTwo){
+          console.log("Requested summation successful.");
+          return {resultNum:origVal+addVal, isWithinRange: true};
+        } else {
+          console.log("Requested summation using aggregateWithinBounds is out of specified range.");
+          return {resultNum:origVal, isWithinRange: false};
+        }
+      } else {
+        console.error("Function aggregateWithinBounds was likely given bad value(s). First range value should be less than the second range value. rangeOne: "+rangeOne+" rangeTwo: "+rangeTwo);
+        return;
+      }
     };
 
 
@@ -172,7 +186,6 @@ init = function(pageLocID) {
 
     //Function that all images call to that pops up the gallery when an image is clicked
     var galleryPopup = function(imgNum) {
-      var galleryPosition = imgNum;
 
       //Gallery Container Element
       var galleryPopupContainer = document.createElement("div");
@@ -195,36 +208,51 @@ init = function(pageLocID) {
       console.log("galleryPopup imgNum = " + imgNum);
 
       //Gallery Side Button Function
-      var galleryLeftButton = document.createElement("img");
-      galleryLeftButton.className = "galleryNavigationButtons";
-      galleryLeftButton.id = "galleryLeftButton";
+      var galleryLeftButton = makeSimpleElem("img", "galleryLeftButton", "galleryNavigationButtons");
       galleryLeftButton.src = "img/ArrowChevronLeft.svg";
       //Changes image and prevents imgNum from going outside the range of where the images are stored in artDB.
       galleryLeftButton.addEventListener('click', function() {
-        if(imgNum >= 1) {
-          imgNum--;
+        let leftGalButtonAgVal = aggregateWithinBounds(0, artDB.length - 1, imgNum, -1);
+        if(leftGalButtonAgVal.isWithinRange == true){
+          imgNum = leftGalButtonAgVal.resultNum;
           galleryPopupImage.src = getImgPath(imgNum, "large");
-          console.log("artDB length: "+artDB.length);
-        } else {
-          console.log("Already at image 0");
         };
       });
+      //Update function of galleryLeftButton that controls whether the arrow is grayed out or not. Called by a click event function attached to galleryPopupContainer.
+      galleryLeftButton.galleryUpdate = function () {
+        if (imgNum <= 0) {
+          galleryLeftButton.style.background = "rgba(0, 0, 0, 0.2)";
+        } else {
+          galleryLeftButton.style.background = "rgba(0, 0, 0, 0.7)";
+        };
+      };
       galleryPopupContainer.appendChild(galleryLeftButton);
 
       var galleryRightButton = makeSimpleElem("img", "galleryRightButton", "galleryNavigationButtons");
       galleryRightButton.src = "img/ArrowChevronRight.svg";
-      galleryRightButton.addEventListener('click',
-        //Changes image and prevents imgNum from surpassing the range of where images are stored in artDB
-        function() {
-          if(imgNum < artDB.length - 1) {
-            imgNum++;
-            galleryPopupImage.src = getImgPath(imgNum, "large");
-          } else {
-            console.log("Already at the end of artDB: "+imgNum);
-          };
+      //Changes image and prevents imgNum from going outside the range of where the images are stored in artDB.
+      galleryRightButton.addEventListener('click', function() {
+        let rightGalButtonAgVal = aggregateWithinBounds(0, artDB.length - 1, imgNum, 1);
+        if(rightGalButtonAgVal.isWithinRange == true){
+          imgNum = rightGalButtonAgVal.resultNum;
+          galleryPopupImage.src = getImgPath(imgNum, "large");
         };
-      );
-      galleryRightButton.appendChild(galleryPopupContainer);
+      });
+      //Update function of galleryRightButton that controls whether the arrow is grayed out or not. Called by a click event function attached to galleryPopupContainer.
+      galleryRightButton.galleryUpdate = function () {
+        if (imgNum >= artDB.length - 1) {
+          galleryRightButton.style.background = "rgba(0, 0, 0, 0.2)";
+        } else {
+          galleryRightButton.style.background = "rgba(0, 0, 0, 0.7)";
+        };
+      };
+      galleryPopupContainer.appendChild(galleryRightButton);
+
+      //Function that activates on any click on the galleryPopupContainer that calls the galleryUpdate function of any specified object.
+      galleryPopupContainer.addEventListener('click', function() { galleryRightButton.galleryUpdate(); galleryLeftButton.galleryUpdate(); });
+      //Initially calls galleryUpdate() functions to make sure buttons are properly grayed out on startup.
+      galleryRightButton.galleryUpdate();
+      galleryLeftButton.galleryUpdate();
 
     };
 
@@ -241,11 +269,6 @@ init = function(pageLocID) {
       //This one keeps getting index 20
       tagTag.addEventListener('click', function () { setFilter(uniqueTag) });
     });
-    //for (i of iTags) {
-      //This one keeps using index 10
-      //document.getElementById('imageTagI' + iTags.indexOf(i)).onclick = function() { console.log(i); };;
-    //}
-    //Sets up all the images on the page
 
 
     for (let i = 0; i <= 7; i++) {
@@ -258,28 +281,14 @@ init = function(pageLocID) {
 
       //Adds the actual image element and appends it to the gallery image container.
       var x = document.createElement("img");
-      //Possibly hacky code here. Check out setAttribute vs. className
-      // x.setAttribute("width", "350px");
-      // x.setAttribute("display", "inline-block");
-      // x.setAttribute("height", "auto");
       x.className = "galleryImage";
       x.id = "galleryImage" + i;
-      x.setAttribute("src", getImgPath(i, "large"));
+      x.src = getImgPath(i, "large");
 
       //Look up difference between var and let in regards to loops and inputting the iterator to a function outside the scope.
       x.addEventListener('click', function () { galleryPopup(i) });
       document.getElementById('galleryImageContainer' + i).appendChild(x);
     };
-    // var img = new Image();
-    // var div = document.getElementById('artContentPanel');
-    //
-    // img.onload = function() {
-    //   div.appendChild(img);
-    // };
-    //
-    // img.src = '/images/bear person.jpg';
-    // var divar = document.getElementById('artContentPanel');
-    // divar.innerHTML = "<img src='/images/Cloudscape.png'/>";
   };
 
 
@@ -317,9 +326,6 @@ init = function(pageLocID) {
     //STUFF FOR SITE-WIDE JAVASCRIPT STUFF
 
     console.info('Good day! Javascript has been successfully initialized!');
-
-    //------------------------------------
-    // Temporarily disabling this: resetVars();
 
     switch(pageLocID){
       case "index":
