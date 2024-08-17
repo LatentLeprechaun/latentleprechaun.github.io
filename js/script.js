@@ -273,7 +273,7 @@ init = function(pageLocID) {
 
     for (let i = 0; i <= 7; i++) {
 
-      //Adds a container for the image, so a constant size can be maintained and the magnifying glass icon can be displayed over the image.
+      //Adds a container for the image, so a constant size can be maintained.
       var c = document.createElement("div");
       c.className = "galleryImageContainer";
       c.id = "galleryImageContainer" + i;
@@ -321,42 +321,28 @@ init = function(pageLocID) {
     console.info("Page location should be writing-things: " + document.location.origin + document.location.pathname + "/n" + artDB[2].name);
   };
 
-  startPageInit = function(pageloc) {
 
-    //STUFF FOR SITE-WIDE JAVASCRIPT STUFF
+  //FOR SITE-WIDE JAVASCRIPT STUFF
+  console.info('Good day! Javascript has been successfully initialized!');
 
-    console.info('Good day! Javascript has been successfully initialized!');
-
-    switch(pageLocID){
-      case "index":
-        indexInit();
-        break;
-      case "code-things":
-        codeThingsInit();
-        break;
-      case "art-things":
-        artThingsInit();
-        break;
-      case "voice-overs":
-        voiceOversInit();
-        break;
-      case "contact":
-        contactInit();
-        break;
-      case "writing-things":
-        writingThingsInit();
-        break;
-    }
-    /*document.getElementById('ditig').innerHTML = "Pay no mind to this (" + window.location.href + ")";
-    var i = document.createElement("p");
-    i.innerHTML = "Hello!";
-    document.body.appendChild(i);
-    alert(document.location.origin + document.location.pathname);
-    //alert(document.location.origin + document.location.pathname.slice(0, this.length - 5));
-    if (document.location.origin + document.location.pathname === document.location.origin + "/code-things.html") {
-      alert("Ye found me code thingies!");
-    }*/
-
-  };
-  startPageInit(pageLocID);
+  switch(pageLocID){
+    case "index":
+      indexInit();
+      break;
+    case "code-things":
+      codeThingsInit();
+      break;
+    case "art-things":
+      artThingsInit();
+      break;
+    case "voice-overs":
+      voiceOversInit();
+      break;
+    case "contact":
+      contactInit();
+      break;
+    case "writing-things":
+      writingThingsInit();
+      break;
+  }
 };
