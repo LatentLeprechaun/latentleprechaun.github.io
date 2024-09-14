@@ -3,10 +3,7 @@
 /*
 TO DO LIST:
 -Add a dark mode
--Find out if you can make a css color filter into a variable
 -Edit navbar with proper naming schemes
--Why do I still have -webkit-flex in my code? Reason?
--Make menu buttons not overlap each other with box shadow
 */
 
 /*Two color basic monochrome palette
@@ -36,6 +33,8 @@ Subtle green: #49ac51
   --muted-green: #49ac51;
 
   --dark-slate: #282726;
+
+  --muted-green-filter: brightness(0%) saturate(100%) invert(54%) sepia(55%) saturate(486%) hue-rotate(74deg) brightness(95%) contrast(87%);
 }
 
 
@@ -98,14 +97,15 @@ p{
   justify-content: center;
   /*justify-content: space-around;*/
   flex-direction: row;
-  flex: 3 1 auto;
-  /*flex-wrap: wrap;*/
+  /* flex: 3 2 auto; */
+  flex-wrap: wrap;
 }
 
 .navWindow .navItem{
-  min-width: 4rem;
+  min-width: min(20vw, 40vw);
   display: flex;
-  flex: 1 1;
+  flex: 3 2;
+  /* flex-wrap: nowrap; */
   text-decoration: none;
   flex-direction: column;
   justify-content: space-evenly;
@@ -132,7 +132,7 @@ p{
   height: 2rem;
   width: auto;
   display: block;
-  filter: brightness(0%) saturate(100%) invert(54%) sepia(55%) saturate(486%) hue-rotate(74deg) brightness(95%) contrast(87%);
+  filter: var(--muted-green-filter);
 }
 
 #header{
@@ -205,13 +205,13 @@ p{
 .content{
   background: var(--off-white);
   max-height: 100%;
-  width: auto;
-  padding: 7em 11em 7em 11em;
+  width: clamp(45ch, 50%, 75ch);
+  /*padding: 7em 11em 7em 11em;*/
   font-family: Tahoma, Geneva, sans-serif;
-  font-size: 1.2em;
+  font-size: clamp(0.5em, 1em, 1.2em);
   text-align: left;
   line-height: 1.4em;
-  min-height: 80vh;
+  /* min-height: 80vh; */
 }
 
 #artContentPanel{
@@ -292,8 +292,9 @@ p{
   background: #EEE;
 }
 
-
-@media handheld, screen and (max-width: 950px){
+/* TODO: Look into min() max() clamp() and calc() for responsive designs*/
+/* TODO: Look into Kevin Powell's YouTube video on designing mobile first*/
+/*@media handheld, screen and (max-width: 950px){
   .navWindow{
     flex-wrap: wrap;
     flex: 1;
@@ -316,3 +317,4 @@ p{
     line-height: 2em;
   }
 }
+*/

@@ -1,3 +1,7 @@
+//TODO: Finish combing through code to remove unnecessary code blocks and make it DRYer
+//TODO: Fix up any code blocks that work, but due to unknown black magic
+
+
 init = function(pageLocID) {
 
 
@@ -11,13 +15,6 @@ init = function(pageLocID) {
     console.info("Page location should be code-things: " + document.location.origin + document.location.pathname);
   };
 
-  // function called when you click on a tag.
-  var setFilter = function(tagname) {
-    console.log("The tag is: " + tagname);
-  };
-
-
-
   //----- ART PAGE SCRIPTS -----
   var artThingsInit = function() {
     console.info("Page location should be art-things: " + document.location.origin + document.location.pathname);
@@ -28,8 +25,7 @@ init = function(pageLocID) {
     var artDB = [];
     var initializeVars = function () {
       // Look up JSON files for this database
-      // make getter functions
-      // look at angularjs
+      // Getter/Setter functions not really required for this database since it's static, but keep in mind if I change it to dynamic.
       iTags = [];
       artDB = [
 
@@ -98,11 +94,17 @@ init = function(pageLocID) {
         }
 
       ];
-      console.info('Variables and image database initialized');
+      console.info('Image database initialized');
     };
 
     console.log("artDB length = "+artDB.length);
     initializeVars();
+
+    // function called when you click on a tag.
+    var setFilter = function(tagname) {
+      //temporarily just prints message
+      console.log("The tag is: " + tagname);
+    };
 
     //Function for finding duplicates in a string with an argument
     var lookUpDupli = function(searchArray, searchFor) {
@@ -322,8 +324,7 @@ init = function(pageLocID) {
   };
 
 
-  //FOR SITE-WIDE JAVASCRIPT STUFF
-  console.info('Good day! Javascript has been successfully initialized!');
+  //WRITE SITE-WIDE CODE BELOW THIS LINE
 
   switch(pageLocID){
     case "index":
