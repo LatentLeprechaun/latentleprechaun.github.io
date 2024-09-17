@@ -4,6 +4,11 @@
 TO DO LIST:
 -Add a dark mode
 -Edit navbar with proper naming schemes
+-clamp nav window width to allow menu items to spread out properly in mobile form factor
+-Remove the content wrapper in to the other pages and adjust the javascript to make sure it still works.
+-Continue trying to figure out how to center the content without a wrapper
+-Remove inlineblockdisplay class
+-Look up object-fit to see what it's actually doing behind the scenes.
 */
 
 /*Two color basic monochrome palette
@@ -50,6 +55,10 @@ body{
   margin: 0;
   padding: 0;
   color: var(--dark-slate);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 h3{
@@ -89,22 +98,21 @@ p{
 
 .navWindow{
   background: var(--dark-slate);
-  height: auto;
+  height: 20vh;
   display: flex;
-  padding-left: 10%;
-  padding-right: 10%;
+  width: 100%;
   box-shadow: 0 0 10px var(--off-white);
   justify-content: center;
   /*justify-content: space-around;*/
   flex-direction: row;
   /* flex: 3 2 auto; */
-  flex-wrap: wrap;
+  flex-flow: column wrap;
 }
 
 .navWindow .navItem{
-  min-width: min(20vw, 40vw);
+  width: min(15vw, 20vw);
   display: flex;
-  flex: 3 2;
+  /* flex: 3 2; */
   /* flex-wrap: nowrap; */
   text-decoration: none;
   flex-direction: column;
@@ -178,11 +186,11 @@ p{
 }
 
 .galleryNavigationButtons {
-  z-index: 1;
+  z-index: 2;
   position: absolute;
   padding: 1rem;
   color: white;
-  width: 6%;
+  width: 5%;
   height: auto;
   background: rgba(0, 0, 0, 0.7);
   border-radius: 100%;
@@ -190,12 +198,12 @@ p{
 
 #galleryLeftButton {
   top: 50%;
-  left: 0;
+  left: 1%;
 }
 
 #galleryRightButton {
   top: 50%;
-  right: 0;
+  right: 1%;
 }
 
 .InlineBlockDisplay {
@@ -204,15 +212,21 @@ p{
 
 .content{
   background: var(--off-white);
+  /* display: flex; */
+  /* justify-content: center; */
   max-height: 100%;
   width: clamp(45ch, 50%, 75ch);
   /*padding: 7em 11em 7em 11em;*/
   font-family: Tahoma, Geneva, sans-serif;
-  font-size: clamp(0.5em, 1em, 1.2em);
-  text-align: left;
+  font-size: clamp(0.5em, 3.5vw, 1.2em);
+  /* text-align: left; */
   line-height: 1.4em;
   /* min-height: 80vh; */
 }
+
+/*.content-wrapper{
+  width: clamp(45ch, 50%, 75ch);
+}*/
 
 #artContentPanel{
   text-align: center;
@@ -239,13 +253,13 @@ p{
 }
 
 #galleryPopupExit{
-  z-index: 1;
+  z-index: 2;
   position: fixed;
   top: 1vw;
   right: 1vw;
-  width: 5vw;
-  height: 5vw;
-  background: black;
+  width: clamp(8vw, 5vw, 4vw);
+  height: clamp(8vw, 5vw, 4vw);
+  background: rgba(0, 0, 0, 0.7);
   box-shadow: 0 0 10px black;
   border-radius: 100%;
   justify-content: center;
@@ -253,7 +267,9 @@ p{
 
 .galleryPopupImage {
   z-index: 1;
-  height: 90vh;
+  width: 90vw;
+  height: auto;
+  object-fit: contain;
 }
 
 .galleryImageContainer {
