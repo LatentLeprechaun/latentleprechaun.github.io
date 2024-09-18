@@ -7,8 +7,8 @@ TO DO LIST:
 -clamp nav window width to allow menu items to spread out properly in mobile form factor
 -Remove the content wrapper in to the other pages and adjust the javascript to make sure it still works.
 -Continue trying to figure out how to center the content without a wrapper
--Remove inlineblockdisplay class
 -Look up object-fit to see what it's actually doing behind the scenes.
+-finish cleaning up css and fixing footer on art section
 */
 
 /*Two color basic monochrome palette
@@ -39,6 +39,8 @@ Subtle green: #49ac51
 
   --dark-slate: #282726;
 
+  --trans-nav-button-background: rgba(0, 0, 0, 0.7);
+
   --muted-green-filter: brightness(0%) saturate(100%) invert(54%) sepia(55%) saturate(486%) hue-rotate(74deg) brightness(95%) contrast(87%);
 }
 
@@ -48,8 +50,6 @@ noscript {
 }
 
 body{
-  /*background: #DDD;*/
-  /*background: #AFE0A0;*/
   background: var(--off-white);
   width: 100dvw;
   margin: 0;
@@ -59,18 +59,13 @@ body{
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-family: Tahoma, Geneva, sans-serif;
 }
 
 h3{
-  font-family: Tahoma, Geneva, sans-serif;
   text-align: center;
   font-weight: bold;
   color: var(--dark-slate);
-}
-
-p{
-  font-family: Tahoma, Geneva, sans-serif;
-  /*text-align: center;*/;
 }
 
 #emailHideBox {
@@ -81,7 +76,6 @@ p{
   padding: 5px;
 }
 
-/*BETTER WAY TO DO THIS?*/
 #profileVoiceoverImg {
   border-radius: 100%;
   border: 5px solid #AAA;
@@ -103,17 +97,13 @@ p{
   width: 100%;
   box-shadow: 0 0 10px var(--off-white);
   justify-content: center;
-  /*justify-content: space-around;*/
   flex-direction: row;
-  /* flex: 3 2 auto; */
   flex-flow: column wrap;
 }
 
 .navWindow .navItem{
   width: min(15vw, 20vw);
   display: flex;
-  /* flex: 3 2; */
-  /* flex-wrap: nowrap; */
   text-decoration: none;
   flex-direction: column;
   justify-content: space-evenly;
@@ -143,40 +133,13 @@ p{
   filter: var(--muted-green-filter);
 }
 
-#header{
-  height: 5em;
-  padding: 0.2em;
-  background-color: #AEA;
-  margin-top: -8px;
-  font-size: 70%;
-}
-
-#header img {
-  display: block;
-  margin: auto;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  border: 8px solid #666;
-  height: auto;
-  max-height: 100vh;
-  width: 65%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-
 #footer{
-  min-height: 16px;
-  font-size: 12px;
-  padding: 4px;
-  font-style: Tahoma, Geneva, monospace;
-  color: #333;
-  /*background-color: rgba(240,240,240,0.25);*/
-  /*position: fixed;*/
+  min-height: 10rem;
+  font-size: 0.7rem;
+  padding: 0.3rem;
+  font-family: Tahoma, Geneva, monospace;
+  color: var(--dark-slate-upshade);
   text-align: center;
-  bottom: 0;
-  left: 0;
-  right: 0;
 }
 
 #tagsPanel{
@@ -192,7 +155,7 @@ p{
   color: white;
   width: 5%;
   height: auto;
-  background: rgba(0, 0, 0, 0.7);
+  background: var(--trans-nav-button-background);
   border-radius: 100%;
 }
 
@@ -206,27 +169,13 @@ p{
   right: 1%;
 }
 
-.InlineBlockDisplay {
-  display: inline-block;
-}
-
 .content{
   background: var(--off-white);
-  /* display: flex; */
-  /* justify-content: center; */
-  max-height: 100%;
+  min-height: 70vh;
   width: clamp(45ch, 50%, 75ch);
-  /*padding: 7em 11em 7em 11em;*/
-  font-family: Tahoma, Geneva, sans-serif;
   font-size: clamp(0.5em, 3.5vw, 1.2em);
-  /* text-align: left; */
   line-height: 1.4em;
-  /* min-height: 80vh; */
 }
-
-/*.content-wrapper{
-  width: clamp(45ch, 50%, 75ch);
-}*/
 
 #artContentPanel{
   text-align: center;
@@ -235,7 +184,6 @@ p{
   flex-wrap: wrap;
   justify-content: space-around;
   width: 90vw;
-  height: 100vh;
 }
 
 #galleryPopupContainer{
@@ -246,7 +194,7 @@ p{
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: var(--trans-nav-button-background);
   justify-content: center;
   padding-top: 5vh;
   padding-bottom: 5vh;
@@ -259,7 +207,7 @@ p{
   right: 1vw;
   width: clamp(8vw, 5vw, 4vw);
   height: clamp(8vw, 5vw, 4vw);
-  background: rgba(0, 0, 0, 0.7);
+  background: var(--trans-nav-button-background);
   box-shadow: 0 0 10px black;
   border-radius: 100%;
   justify-content: center;
@@ -297,7 +245,7 @@ p{
   padding-bottom: 0.1em;
   font-size: 0.8em;
   text-align: center;
-  color: #222;
+  color: var(--dark-slate-upshade);
   display: inline-flex;
   justify-content: space-between;
   margin: 0.3em;
@@ -307,30 +255,3 @@ p{
 .imageTags:hover{
   background: #EEE;
 }
-
-/* TODO: Look into min() max() clamp() and calc() for responsive designs*/
-/* TODO: Look into Kevin Powell's YouTube video on designing mobile first*/
-/*@media handheld, screen and (max-width: 950px){
-  .navWindow{
-    flex-wrap: wrap;
-    flex: 1;
-  }
-  .navWindow .navItem{
-    flex: 0.2 0.2 30%;
-    font-size: 1.1em;
-  }
-  #header{
-    font-size: 50%;
-  }
-  .navWindow .navItem:hover{
-    background: #FFF;
-    flex-grow: 1;
-  }
-  .content{
-    margin: -1em 2em -1em 2em;
-    padding: 2em 1em 2em 1em;
-    font-size: 0.8em;
-    line-height: 2em;
-  }
-}
-*/
