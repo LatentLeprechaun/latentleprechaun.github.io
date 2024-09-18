@@ -99,6 +99,7 @@ h3{
   justify-content: center;
   flex-direction: row;
   flex-flow: column wrap;
+  /* font-family: 'Muli', sans-serif; */
 }
 
 .navWindow .navItem{
@@ -111,7 +112,6 @@ h3{
   background: var(--dark-slate);
   height: 5rem;
   text-align: center;
-  font-family: 'Muli', sans-serif;
   font-size: 1rem;
   color: var(--muted-green);
   transition: flex 90ms ease-in, background 90ms ease-in, color 90ms ease-in;
