@@ -110,9 +110,9 @@ h3{
   justify-content: space-evenly;
   margin: 0px;
   background: var(--dark-slate);
-  height: 5rem;
+  height: 15vh;
   text-align: center;
-  font-size: 1rem;
+  font-size: 2vh;
   color: var(--muted-green);
   transition: flex 90ms ease-in, background 90ms ease-in, color 90ms ease-in;
 }
@@ -127,7 +127,7 @@ h3{
   margin: auto;
   margin-bottom: 10px;
   margin-top: 10px;
-  height: 2rem;
+  height: 8vh;
   width: auto;
   display: block;
   filter: var(--muted-green-filter);
@@ -172,8 +172,8 @@ h3{
 .content{
   background: var(--off-white);
   min-height: 70vh;
-  width: clamp(45ch, 50%, 75ch);
-  font-size: clamp(0.5em, 3.5vw, 1.2em);
+  width: 60vw;
+  font-size: max(1vw, 1rem);
   line-height: 1.4em;
 }
 
