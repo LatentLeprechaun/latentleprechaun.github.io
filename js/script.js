@@ -22,12 +22,12 @@ init = function(pageLocID) {
 
     //Image Database and Tag functions
     var iTags = [];
-    var artDB = [];
+    var imageDB = [];
     var initializeVars = function () {
       // Look up JSON files for this database
       // Getter/Setter functions not really required for this database since it's static, but keep in mind if I change it to dynamic.
       iTags = [];
-      artDB = [
+      imageDB = [
 
         // {
         //   name: "",
@@ -97,7 +97,7 @@ init = function(pageLocID) {
       console.info('Image database initialized');
     };
 
-    console.log("artDB length = "+artDB.length);
+    console.log("imageDB length = "+imageDB.length);
     initializeVars();
 
     // function called when you click on a tag.
@@ -106,44 +106,30 @@ init = function(pageLocID) {
       console.log("The tag is: " + tagname);
     };
 
-    //Function for finding duplicates in a string with an argument
-    var lookUpDupli = function(searchArray, searchFor) {
-      var i;
-      for (i of searchArray) {
-        if (i == searchFor) {
-          //console.log("lookUpDupli exited true with a match of: " + i + " = " + searchFor);
-          return true;
-        }
-      };
-      //console.log("lookUpDupli exited false without finding a match. Last comparison: " + i + " = " + searchFor);
-      return false;
-    };
-
-    //Function for building the image path from the artDB using the arguments of location(within the database array) and size for specifying whether it should be thumbnail or large.
-    var getImgPath = function(loc, size) {
+    //Function for building the image path from the imageDB using the arguments of location(within the database array) and size for specifying whether it should be thumbnail or large.
+    var getImgPath = function(loc, size, db) {
       console.info("getImgPath Loading image " + loc);
       if (size === "large") {
-        return "/images/" + artDB[loc].fileName;
+        return "/images/" + db[loc].fileName;
       } else if (size === "thumbnail") {
-        return "/images/thumbnails" + artDB[loc].fileName;
+        return "/images/thumbnails" + db[loc].fileName;
       } else {
         console.error("getImgPath(" + loc + ", " + size + ") is having problems.");
         return false;
       }
     };
 
-    //Concatenates all the tags in the artDB to one array. HIGH POTENTIAL FOR BREAKING THINGS TERRIBLY. Needs to be reworked.
-    var getTags = function() {
-      for(x of artDB) {
+    //Returns an array with all the tags in the imageDB concatenated together.
+    var getCombinedTags = function(db) {
+      const combinedArray = [];
+      for(x of db) {
         for(i of x.tags) {
-          if (iTags.length == 0){
-            iTags.push(i);
-          };
-          if (!lookUpDupli(iTags, i)) {
-            iTags.push(i);
+          if (!combinedArray.includes(i)) {
+            combinedArray.push(i);
           };
         };
       };
+      return combinedArray;
     };
 
 
@@ -205,24 +191,24 @@ init = function(pageLocID) {
       //Gallery Image
       var galleryPopupImage = document.createElement("img");
       galleryPopupImage.className = "galleryPopupImage";
-      galleryPopupImage.src = getImgPath(imgNum, "large");
+      galleryPopupImage.src = getImgPath(imgNum, "large", imageDB);
       galleryPopupContainer.appendChild(galleryPopupImage);
       console.log("galleryPopup imgNum = " + imgNum);
 
       //Gallery Side Button Function
       var galleryLeftButton = makeSimpleElem("img", "galleryLeftButton", "galleryNavigationButtons");
       galleryLeftButton.src = "img/ArrowChevronLeft.svg";
-      //Changes image and prevents imgNum from going outside the range of where the images are stored in artDB.
+      //Changes image and prevents imgNum from going outside the range of where the images are stored in imageDB.
       galleryLeftButton.addEventListener('click', function() {
-        let leftGalButtonAgVal = aggregateWithinBounds(0, artDB.length - 1, imgNum, -1);
+        let leftGalButtonAgVal = aggregateWithinBounds(0, imageDB.length - 1, imgNum, -1);
         if(leftGalButtonAgVal.isWithinRange == true){
           imgNum = leftGalButtonAgVal.resultNum;
-          galleryPopupImage.src = getImgPath(imgNum, "large");
+          galleryPopupImage.src = getImgPath(imgNum, "large", imageDB);
         };
       });
       //Update function of galleryLeftButton that controls whether the arrow is grayed out or not. Called by a click event function attached to galleryPopupContainer.
-      galleryLeftButton.galleryUpdate = function () {
-        if (imgNum <= 0) {
+      galleryLeftButton.galleryUpdate = function (imageNumber) {
+        if (imageNumber <= 0) {
           galleryLeftButton.style.background = "rgba(0, 0, 0, 0.2)";
         } else {
           galleryLeftButton.style.background = "rgba(0, 0, 0, 0.7)";
@@ -232,17 +218,17 @@ init = function(pageLocID) {
 
       var galleryRightButton = makeSimpleElem("img", "galleryRightButton", "galleryNavigationButtons");
       galleryRightButton.src = "img/ArrowChevronRight.svg";
-      //Changes image and prevents imgNum from going outside the range of where the images are stored in artDB.
+      //Changes image and prevents imgNum from going outside the range of where the images are stored in imageDB.
       galleryRightButton.addEventListener('click', function() {
-        let rightGalButtonAgVal = aggregateWithinBounds(0, artDB.length - 1, imgNum, 1);
+        let rightGalButtonAgVal = aggregateWithinBounds(0, imageDB.length - 1, imgNum, 1);
         if(rightGalButtonAgVal.isWithinRange == true){
           imgNum = rightGalButtonAgVal.resultNum;
-          galleryPopupImage.src = getImgPath(imgNum, "large");
+          galleryPopupImage.src = getImgPath(imgNum, "large", imageDB);
         };
       });
       //Update function of galleryRightButton that controls whether the arrow is grayed out or not. Called by a click event function attached to galleryPopupContainer.
-      galleryRightButton.galleryUpdate = function () {
-        if (imgNum >= artDB.length - 1) {
+      galleryRightButton.galleryUpdate = function (imageNumber, imageDatabase) {
+        if (imageNumber >= imageDatabase.length - 1) {
           galleryRightButton.style.background = "rgba(0, 0, 0, 0.2)";
         } else {
           galleryRightButton.style.background = "rgba(0, 0, 0, 0.7)";
@@ -251,16 +237,17 @@ init = function(pageLocID) {
       galleryPopupContainer.appendChild(galleryRightButton);
 
       //Function that activates on any click on the galleryPopupContainer that calls the galleryUpdate function of any specified object.
-      galleryPopupContainer.addEventListener('click', function() { galleryRightButton.galleryUpdate(); galleryLeftButton.galleryUpdate(); });
+      galleryPopupContainer.addEventListener('click', function() { galleryRightButton.galleryUpdate(imgNum, imageDB); galleryLeftButton.galleryUpdate(imgNum); });
       //Initially calls galleryUpdate() functions to make sure buttons are properly grayed out on startup.
-      galleryRightButton.galleryUpdate();
-      galleryLeftButton.galleryUpdate();
+      galleryRightButton.galleryUpdate(imgNum, imageDB);
+      galleryLeftButton.galleryUpdate(imgNum);
 
     };
 
     //Hacky code alert
     //Sets up the tags
-    getTags();
+    iTags = getCombinedTags(imageDB);
+    console.log(iTags);
     iTags.forEach(function (uniqueTag, i) {
       var tagTag = document.createElement("div");
       tagTag.className = "imageTags";
@@ -285,7 +272,7 @@ init = function(pageLocID) {
       var x = document.createElement("img");
       x.className = "galleryImage";
       x.id = "galleryImage" + i;
-      x.src = getImgPath(i, "large");
+      x.src = getImgPath(i, "large", imageDB);
 
       //Look up difference between var and let in regards to loops and inputting the iterator to a function outside the scope.
       x.addEventListener('click', function () { galleryPopup(i) });
@@ -320,7 +307,7 @@ init = function(pageLocID) {
 
   //----- WRITING PAGE SCRIPTS -----
   var writingThingsInit = function() {
-    console.info("Page location should be writing-things: " + document.location.origin + document.location.pathname + "/n" + artDB[2].name);
+    console.info("Page location should be writing-things: " + document.location.origin + document.location.pathname);
   };
 
 
