@@ -19,86 +19,95 @@ init = function(pageLocID) {
   var artThingsInit = function() {
     console.info("Page location should be art-things: " + document.location.origin + document.location.pathname);
 
-
-    //Image Database and Tag functions
-    var iTags = [];
-    var imageDB = [];
-    var initializeVars = function () {
-      // Look up JSON files for this database
-      // Getter/Setter functions not really required for this database since it's static, but keep in mind if I change it to dynamic.
-      iTags = [];
-      imageDB = [
-
-        // {
-        //   name: "",
-        //   description: "",
-        //   fileName: "",
-        //   tags: []
-        // },
-
-        {
-          name: "Praying Mantis Study",
-          description: "A praying mantis study.",
-          fileName: "prayingMantis.jpg",
-          tags: ["study", "insect", "animal", "nature", "pen", "traditional", "2D", "2016"]
-        },
-
-        {
-          name: "Anna Blunck and her Horses",
-          description: "Anna Blunck with her horses. Instagram: @ab.horses",
-          fileName: "AbHorsesDraw.JPG",
-          tags: ["sketch", "pencil", "animal", "human", "traditional", "2D", "2016"]
-        },
-
-        {
-          name: "A Portrait of Erik Orozco",
-          description: "This is a portrait I drew of Erik Orozco. Instagram: @erik_orozco",
-          fileName: "ErikOrozcoDraw.png",
-          tags: ["portrait", "pencil", "human", "traditional", "2D", "2016"]
-        },
-
-        {
-          name: "Airship Concept",
-          description: "An airship concept I drew.",
-          fileName: "SpaceshipConcept.png",
-          tags: ["concept", "vehicle", "digital", "sci-fi", "2D", "2016"]
-        },
-
-    // a repeat for testing purposes
-        {
-          name: "Airship Concept",
-          description: "An airship concept I drew.",
-          fileName: "SpaceshipConcept.png",
-          tags: ["concept", "vehicle", "digital", "sci-fi", "2D", "2016"]
-        },
-
-        {
-          name: "Praying Mantis Study",
-          description: "A praying mantis study.",
-          fileName: "prayingMantis.jpg",
-          tags: ["study", "insect", "animal", "nature", "pen", "traditional", "2016"]
-        },
-
-        {
-          name: "Anna Blunck and her Horses",
-          description: "Anna Blunck with her horses. Instagram: @ab.horses",
-          fileName: "AbHorsesDraw.JPG",
-          tags: ["sketch", "pencil", "animal", "human", "traditional", "2D", "2016"]
-        },
-
-        {
-          name: "A Portrait of Erik Orozco",
-          description: "This is a portrait I drew of Erik Orozco. Instagram: @erik_orozco",
-          fileName: "ErikOrozcoDraw.png",
-          tags: ["portrait", "pencil", "human", "traditional", "2D", "2016"]
-        }
-
-      ];
-      console.info('Image database initialized');
+    //Returns an array with all the 'tags' attributes in the specified database concatenated together.
+    var getCombinedTags = function(db) {
+      const combinedArray = [];
+      for(x of db) {
+        for(i of x.tags) {
+          if (!combinedArray.includes(i)) {
+            combinedArray.push(i);
+          };
+        };
+      };
+      return combinedArray;
     };
 
+    //Image Database and Tag functions
+    // Look up JSON files for this database
+    // Getter/Setter functions not really required for this database since it's static, but keep in mind if I change it to dynamic.
+    let imageDB = [
+
+      // {
+      //   name: "",
+      //   description: "",
+      //   fileName: "",
+      //   tags: []
+      // },
+
+      {
+        name: "Praying Mantis Study",
+        description: "A praying mantis study.",
+        fileName: "prayingMantis.jpg",
+        tags: ["study", "insect", "animal", "nature", "pen", "traditional", "2D", "2016"]
+      },
+
+      {
+        name: "Anna Blunck and her Horses",
+        description: "Anna Blunck with her horses. Instagram: @ab.horses",
+        fileName: "AbHorsesDraw.JPG",
+        tags: ["sketch", "pencil", "animal", "human", "traditional", "2D", "2016"]
+      },
+
+      {
+        name: "A Portrait of Erik Orozco",
+        description: "This is a portrait I drew of Erik Orozco. Instagram: @erik_orozco",
+        fileName: "ErikOrozcoDraw.png",
+        tags: ["portrait", "pencil", "human", "traditional", "2D", "2016"]
+      },
+
+      {
+        name: "Airship Concept",
+        description: "An airship concept I drew.",
+        fileName: "SpaceshipConcept.png",
+        tags: ["concept", "vehicle", "digital", "sci-fi", "2D", "2016"]
+      },
+
+      // a repeat for testing purposes
+      {
+        name: "Airship Concept",
+        description: "An airship concept I drew.",
+        fileName: "SpaceshipConcept.png",
+        tags: ["concept", "vehicle", "digital", "sci-fi", "2D", "2016"]
+      },
+
+      {
+        name: "Praying Mantis Study",
+        description: "A praying mantis study.",
+        fileName: "prayingMantis.jpg",
+        tags: ["study", "insect", "animal", "nature", "pen", "traditional", "2016"]
+      },
+
+      {
+        name: "Anna Blunck and her Horses",
+        description: "Anna Blunck with her horses. Instagram: @ab.horses",
+        fileName: "AbHorsesDraw.JPG",
+        tags: ["sketch", "pencil", "animal", "human", "traditional", "2D", "2016"]
+      },
+
+      {
+        name: "A Portrait of Erik Orozco",
+        description: "This is a portrait I drew of Erik Orozco. Instagram: @erik_orozco",
+        fileName: "ErikOrozcoDraw.png",
+        tags: ["portrait", "pencil", "human", "traditional", "2D", "2016"]
+      }
+
+    ];
+
+    let iTags = getCombinedTags(imageDB);
+
+    console.info('Image database initialized');
+
     console.log("imageDB length = "+imageDB.length);
-    initializeVars();
 
     // function called when you click on a tag.
     var setFilter = function(tagname) {
@@ -118,20 +127,6 @@ init = function(pageLocID) {
         return false;
       }
     };
-
-    //Returns an array with all the tags in the imageDB concatenated together.
-    var getCombinedTags = function(db) {
-      const combinedArray = [];
-      for(x of db) {
-        for(i of x.tags) {
-          if (!combinedArray.includes(i)) {
-            combinedArray.push(i);
-          };
-        };
-      };
-      return combinedArray;
-    };
-
 
     // Function to make elements a little faster to create with less code. Any passthrough variable that is not needed should be declared as null.
     // Example: let sideButton = makeSimpleButton("div", "simpleButton1", "buttonClass");
@@ -246,7 +241,6 @@ init = function(pageLocID) {
 
     //Hacky code alert
     //Sets up the tags
-    iTags = getCombinedTags(imageDB);
     console.log(iTags);
     iTags.forEach(function (uniqueTag, i) {
       var tagTag = document.createElement("div");
