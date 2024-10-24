@@ -239,18 +239,12 @@ init = function(pageLocID) {
 
     };
 
-    //Hacky code alert
     //Sets up the tags
-    console.log(iTags);
-    iTags.forEach(function (uniqueTag, i) {
-      var tagTag = document.createElement("div");
-      tagTag.className = "imageTags";
-      tagTag.id = "imageTagI_" + i;
-      tagTag.textContent = uniqueTag;
-      document.getElementById('tagsPanel').appendChild(tagTag);
-      //I don't know what is going on here. Incre keeps pointing to the very last tag. It refuses to iterate.
-      //This one keeps getting index 20
-      tagTag.addEventListener('click', function () { setFilter(uniqueTag) });
+    iTags.forEach((uniqueTag) => {
+      var tagElement = makeSimpleElem('div', `imageTag-${uniqueTag}`, 'imageTags');
+      tagElement.textContent = uniqueTag;
+      document.getElementById('tagsPanel').appendChild(tagElement);
+      tagElement.addEventListener('click', function () { setFilter(uniqueTag) });
     });
 
 
