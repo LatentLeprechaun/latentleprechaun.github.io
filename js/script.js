@@ -1,27 +1,27 @@
 //TODO: Finish combing through code to remove unnecessary code blocks and make it DRYer
-//TODO: Fix up any code blocks that work, but due to unknown black magic
+//TODO: Make images load as thumbnails by default and upgrade to full resolution in gallery mode.
 
 
 init = function(pageLocID) {
 
 
   //----- MAIN PAGE SCRIPTS -----
-  var indexInit = function() {
+  const indexInit = function() {
     console.info("Page location should be index: " + document.location.origin + document.location.pathname);
   };
 
   //----- CODE PAGE SCRIPTS -----
-  var codeThingsInit = function() {
+  const codeThingsInit = function() {
     console.info("Page location should be code-things: " + document.location.origin + document.location.pathname);
   };
 
   //----- ART PAGE SCRIPTS -----
-  var artThingsInit = function() {
+  const artThingsInit = function() {
     console.info("Page location should be art-things: " + document.location.origin + document.location.pathname);
 
     //Returns an array with all the 'tags' attributes in the specified database concatenated together.
-    var getCombinedTags = function(db) {
-      const combinedArray = [];
+    const getCombinedTags = function(db) {
+      let combinedArray = [];
       for(x of db) {
         for(i of x.tags) {
           if (!combinedArray.includes(i)) {
@@ -110,13 +110,13 @@ init = function(pageLocID) {
     console.log("imageDB length = "+imageDB.length);
 
     // function called when you click on a tag.
-    var setFilter = function(tagname) {
+    const setFilter = function(tagname) {
       //temporarily just prints message
       console.log("The tag is: " + tagname);
     };
 
     //Function for building the image path from the imageDB using the arguments of location(within the database array) and size for specifying whether it should be thumbnail or large.
-    var getImgPath = function(loc, size, db) {
+    const getImgPath = function(loc, size, db) {
       console.info("getImgPath Loading image " + loc);
       if (size === "large") {
         return "/images/" + db[loc].fileName;
@@ -130,30 +130,30 @@ init = function(pageLocID) {
 
 
     //Function that all images call to that pops up the gallery when an image is clicked
-    var galleryPopup = function(imgNum) {
+    const galleryPopup = function(imgNum) {
 
       //Gallery Container Element
-      var galleryPopupContainer = document.createElement("div");
+      const galleryPopupContainer = document.createElement("div");
       galleryPopupContainer.id = "galleryPopupContainer";
       document.body.appendChild(galleryPopupContainer);
       console.log("galleryPopup function completed.");
 
       //Gallery Exit Button
-      var galleryPopupExit = document.createElement("img");
+      const galleryPopupExit = document.createElement("img");
       galleryPopupExit.id = "galleryPopupExit";
       galleryPopupExit.src = "img/exitX.png";
       galleryPopupExit.addEventListener('click', function() {galleryPopupContainer.remove()});
       galleryPopupContainer.appendChild(galleryPopupExit);
 
       //Gallery Image
-      var galleryPopupImage = document.createElement("img");
+      const galleryPopupImage = document.createElement("img");
       galleryPopupImage.className = "galleryPopupImage";
       galleryPopupImage.src = getImgPath(imgNum, "large", imageDB);
       galleryPopupContainer.appendChild(galleryPopupImage);
       console.log("galleryPopup imgNum = " + imgNum);
 
       //Gallery Side Button Function
-      var galleryLeftButton = makeSimpleElem("img", "galleryLeftButton", "galleryNavigationButtons");
+      const galleryLeftButton = makeSimpleElem("img", "galleryLeftButton", "galleryNavigationButtons");
       galleryLeftButton.src = "img/ArrowChevronLeft.svg";
       //Changes image and prevents imgNum from going outside the range of where the images are stored in imageDB.
       galleryLeftButton.addEventListener('click', function() {
@@ -173,7 +173,7 @@ init = function(pageLocID) {
       };
       galleryPopupContainer.appendChild(galleryLeftButton);
 
-      var galleryRightButton = makeSimpleElem("img", "galleryRightButton", "galleryNavigationButtons");
+      const galleryRightButton = makeSimpleElem("img", "galleryRightButton", "galleryNavigationButtons");
       galleryRightButton.src = "img/ArrowChevronRight.svg";
       //Changes image and prevents imgNum from going outside the range of where the images are stored in imageDB.
       galleryRightButton.addEventListener('click', function() {
@@ -203,7 +203,7 @@ init = function(pageLocID) {
 
     //Sets up the tags
     iTags.forEach((uniqueTag) => {
-      var tagElement = makeSimpleElem('div', `imageTag-${uniqueTag}`, 'imageTags');
+      const tagElement = makeSimpleElem('div', `imageTag-${uniqueTag}`, 'imageTags');
       tagElement.textContent = uniqueTag;
       document.getElementById('tagsPanel').appendChild(tagElement);
       tagElement.addEventListener('click', function () { setFilter(uniqueTag) });
@@ -213,18 +213,18 @@ init = function(pageLocID) {
     for (let i = 0; i <= 7; i++) {
 
       //Adds a container for the image, so a constant size can be maintained.
-      var c = document.createElement("div");
+      const c = document.createElement("div");
       c.className = "galleryImageContainer";
       c.id = "galleryImageContainer" + i;
       document.getElementById('artContentPanel').appendChild(c);
 
       //Adds the actual image element and appends it to the gallery image container.
-      var x = document.createElement("img");
+      const x = document.createElement("img");
       x.className = "galleryImage";
       x.id = "galleryImage" + i;
       x.src = getImgPath(i, "large", imageDB);
 
-      //Look up difference between var and let in regards to loops and inputting the iterator to a function outside the scope.
+      //TODO: Look up difference between var and let in regards to loops and inputting the iterator to a function outside the scope.
       x.addEventListener('click', function () { galleryPopup(i) });
       document.getElementById('galleryImageContainer' + i).appendChild(x);
     };
@@ -233,7 +233,7 @@ init = function(pageLocID) {
 
 
   //----- VOICEOVER PAGE SCRIPTS -----
-  var voiceOversInit = function() {
+  const voiceOversInit = function() {
     console.info("Page location should be voice-overs: " + document.location.origin + document.location.pathname);
   };
 
@@ -241,9 +241,9 @@ init = function(pageLocID) {
 
 
   //----- CONTACT PAGE SCRIPTS -----
-  var contactInit = function() {
+  const contactInit = function() {
     console.info("Page location should be contact: " + document.location.origin + document.location.pathname);
-    var addressHider = document.getElementById('emailHideBox');
+    const addressHider = document.getElementById('emailHideBox');
     addressHider.innerHTML = "(Mouse over or click)";
     addressHider.onmouseover = function() {
       addressHider.innerHTML = "joseph.br.raymond@gmail.com";
@@ -256,7 +256,7 @@ init = function(pageLocID) {
 
 
   //----- WRITING PAGE SCRIPTS -----
-  var writingThingsInit = function() {
+  const writingThingsInit = function() {
     console.info("Page location should be writing-things: " + document.location.origin + document.location.pathname);
   };
 
@@ -272,7 +272,7 @@ init = function(pageLocID) {
   // Example: let sideButton = makeSimpleButton("div", "simpleButton1", "buttonClass");
   // Returns an element object
   // TODO: look into function currying to make this better
-  var makeSimpleElem = function(elementKind, idN, classN) {
+  const makeSimpleElem = function(elementKind, idN, classN) {
 
     let simpleElement = document.createElement(elementKind ? elementKind : "div");
 
@@ -284,24 +284,24 @@ init = function(pageLocID) {
   };
 
   //Function that takes a number, a value to add to the number, and a lower value and higher value to specify a range.
-    //Adds addVal to origVal as long is it doesn't exceed the range.
-    //Range inclusive. Returns an object with the sum of origVal+addVal and a boolean value specifying whether requested summation is within bounds.
-    //Example: aggregateWithinBounds(-4, 10, numberToAddTo, 1);
-    var aggregateWithinBounds = function(rangeOne, rangeTwo, origVal, addVal) {
-      //Throws error if rangeOne isn't less than rangeTwo.
-      if(rangeOne < rangeTwo){
-        if (origVal + addVal >= rangeOne && origVal + addVal <= rangeTwo){
-          console.log("Requested summation successful.");
-          return {resultNum:origVal+addVal, isWithinRange: true};
-        } else {
-          console.log("Requested summation using aggregateWithinBounds is out of specified range.");
-          return {resultNum:origVal, isWithinRange: false};
-        }
+  //Adds addVal to origVal as long is it doesn't exceed the range.
+  //Range inclusive. Returns an object with the sum of origVal+addVal and a boolean value specifying whether requested summation is within bounds.
+  //Example: aggregateWithinBounds(-4, 10, numberToAddTo, 1);
+  const aggregateWithinBounds = function(rangeOne, rangeTwo, origVal, addVal) {
+    //Throws error if rangeOne isn't less than rangeTwo.
+    if(rangeOne < rangeTwo){
+      if (origVal + addVal >= rangeOne && origVal + addVal <= rangeTwo){
+        console.log("Requested summation successful.");
+        return {resultNum:origVal+addVal, isWithinRange: true};
       } else {
-        console.error("Function aggregateWithinBounds was likely given bad value(s). First range value should be less than the second range value. rangeOne: "+rangeOne+" rangeTwo: "+rangeTwo);
-        return;
+        console.log("Requested summation using aggregateWithinBounds is out of specified range.");
+        return {resultNum:origVal, isWithinRange: false};
       }
-    };
+    } else {
+      console.error("Function aggregateWithinBounds was likely given bad value(s). First range value should be less than the second range value. rangeOne: "+rangeOne+" rangeTwo: "+rangeTwo);
+      return;
+    }
+  };
 
 
   switch(pageLocID){
