@@ -1,6 +1,8 @@
 //TODO: Finish combing through code to remove unnecessary code blocks and make it DRYer
 //TODO: Make images load as thumbnails by default and upgrade to full resolution in gallery mode.
 
+//TODO: read up on the .set function, .flatmap, and other array/object functions
+
 
 init = function(pageLocID) {
 
@@ -102,6 +104,10 @@ init = function(pageLocID) {
       }
 
     ];
+
+    //TEMPORARY REMOVE IMMEDIATELY
+    //Testing JSON data output
+    console.log(JSON.stringify(imageDB, null, "\t"));
 
     let iTags = getCombinedTags(imageDB);
 
