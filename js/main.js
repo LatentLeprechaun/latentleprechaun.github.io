@@ -1,11 +1,20 @@
+import *  as utillat from "./utils.js";
+
+//Image Database and Tag functions
+// Look up JSON files for this database
+// Getter/Setter functions not really required for this database since it's static, but keep in mind if I change it to dynamic.
+import { imageDB } from "./imageDB.js";
+
+//This directory pointer is temporary. Will need to be put in its own directory when the website is moved to a proper web server instead of just Github.
+//import jsonData from './ImageDB.json' assert { type: 'json' };
+//console.log(jsonData);
+
+//TODO: Finish adjusting script references in all the other html pages and make a way for the javascript to know which page it's on
 //TODO: Finish combing through code to remove unnecessary code blocks and make it DRYer
 //TODO: Make images load as thumbnails by default and upgrade to full resolution in gallery mode.
-
 //TODO: read up on the .set function, .flatmap, and other array/object functions
 
-
-init = function(pageLocID) {
-
+const init = function(pageLocID) {
 
   //----- MAIN PAGE SCRIPTS -----
   const indexInit = function() {
@@ -21,95 +30,7 @@ init = function(pageLocID) {
   const artThingsInit = function() {
     console.info("Page location should be art-things: " + document.location.origin + document.location.pathname);
 
-    //Returns an array with all the 'tags' attributes in the specified database concatenated together.
-    const getCombinedTags = function(db) {
-      let combinedArray = [];
-      for(x of db) {
-        for(i of x.tags) {
-          if (!combinedArray.includes(i)) {
-            combinedArray.push(i);
-          };
-        };
-      };
-      return combinedArray;
-    };
-
-    //Image Database and Tag functions
-    // Look up JSON files for this database
-    // Getter/Setter functions not really required for this database since it's static, but keep in mind if I change it to dynamic.
-    let imageDB = [
-
-      // {
-      //   name: "",
-      //   description: "",
-      //   fileName: "",
-      //   tags: []
-      // },
-
-      {
-        name: "Praying Mantis Study",
-        description: "A praying mantis study.",
-        fileName: "prayingMantis.jpg",
-        tags: ["study", "insect", "animal", "nature", "pen", "traditional", "2D", "2016"]
-      },
-
-      {
-        name: "Anna Blunck and her Horses",
-        description: "Anna Blunck with her horses. Instagram: @ab.horses",
-        fileName: "AbHorsesDraw.JPG",
-        tags: ["sketch", "pencil", "animal", "human", "traditional", "2D", "2016"]
-      },
-
-      {
-        name: "A Portrait of Erik Orozco",
-        description: "This is a portrait I drew of Erik Orozco. Instagram: @erik_orozco",
-        fileName: "ErikOrozcoDraw.png",
-        tags: ["portrait", "pencil", "human", "traditional", "2D", "2016"]
-      },
-
-      {
-        name: "Airship Concept",
-        description: "An airship concept I drew.",
-        fileName: "SpaceshipConcept.png",
-        tags: ["concept", "vehicle", "digital", "sci-fi", "2D", "2016"]
-      },
-
-      // a repeat for testing purposes
-      {
-        name: "Airship Concept",
-        description: "An airship concept I drew.",
-        fileName: "SpaceshipConcept.png",
-        tags: ["concept", "vehicle", "digital", "sci-fi", "2D", "2016"]
-      },
-
-      {
-        name: "Praying Mantis Study",
-        description: "A praying mantis study.",
-        fileName: "prayingMantis.jpg",
-        tags: ["study", "insect", "animal", "nature", "pen", "traditional", "2016"]
-      },
-
-      {
-        name: "Anna Blunck and her Horses",
-        description: "Anna Blunck with her horses. Instagram: @ab.horses",
-        fileName: "AbHorsesDraw.JPG",
-        tags: ["sketch", "pencil", "animal", "human", "traditional", "2D", "2016"]
-      },
-
-      {
-        name: "A Portrait of Erik Orozco",
-        description: "This is a portrait I drew of Erik Orozco. Instagram: @erik_orozco",
-        fileName: "ErikOrozcoDraw.png",
-        tags: ["portrait", "pencil", "human", "traditional", "2D", "2016"]
-      }
-
-    ];
-
-    //TEMPORARY REMOVE IMMEDIATELY
-    //Testing JSON data output
-    console.log(JSON.stringify(imageDB, null, "\t"));
-
-    let iTags = getCombinedTags(imageDB);
+    let iTags = utillat.getCombinedTags(imageDB);
 
     console.info('Image database initialized');
 
@@ -159,11 +80,11 @@ init = function(pageLocID) {
       console.log("galleryPopup imgNum = " + imgNum);
 
       //Gallery Side Button Function
-      const galleryLeftButton = makeSimpleElem("img", "galleryLeftButton", "galleryNavigationButtons");
+      const galleryLeftButton = utillat.makeSimpleElem("img", "galleryLeftButton", "galleryNavigationButtons");
       galleryLeftButton.src = "img/ArrowChevronLeft.svg";
       //Changes image and prevents imgNum from going outside the range of where the images are stored in imageDB.
       galleryLeftButton.addEventListener('click', function() {
-        let leftGalButtonAgVal = aggregateWithinBounds(0, imageDB.length - 1, imgNum, -1);
+        let leftGalButtonAgVal = utillat.aggregateWithinBounds(0, imageDB.length - 1, imgNum, -1);
         if(leftGalButtonAgVal.isWithinRange == true){
           imgNum = leftGalButtonAgVal.resultNum;
           galleryPopupImage.src = getImgPath(imgNum, "large", imageDB);
@@ -179,11 +100,11 @@ init = function(pageLocID) {
       };
       galleryPopupContainer.appendChild(galleryLeftButton);
 
-      const galleryRightButton = makeSimpleElem("img", "galleryRightButton", "galleryNavigationButtons");
+      const galleryRightButton = utillat.makeSimpleElem("img", "galleryRightButton", "galleryNavigationButtons");
       galleryRightButton.src = "img/ArrowChevronRight.svg";
       //Changes image and prevents imgNum from going outside the range of where the images are stored in imageDB.
       galleryRightButton.addEventListener('click', function() {
-        let rightGalButtonAgVal = aggregateWithinBounds(0, imageDB.length - 1, imgNum, 1);
+        let rightGalButtonAgVal = utillat.aggregateWithinBounds(0, imageDB.length - 1, imgNum, 1);
         if(rightGalButtonAgVal.isWithinRange == true){
           imgNum = rightGalButtonAgVal.resultNum;
           galleryPopupImage.src = getImgPath(imgNum, "large", imageDB);
@@ -209,7 +130,7 @@ init = function(pageLocID) {
 
     //Sets up the tags
     iTags.forEach((uniqueTag) => {
-      const tagElement = makeSimpleElem('div', `imageTag-${uniqueTag}`, 'imageTags');
+      const tagElement = utillat.makeSimpleElem('div', `imageTag-${uniqueTag}`, 'imageTags');
       tagElement.textContent = uniqueTag;
       document.getElementById('tagsPanel').appendChild(tagElement);
       tagElement.addEventListener('click', function () { setFilter(uniqueTag) });
@@ -270,46 +191,6 @@ init = function(pageLocID) {
   //WRITE SITE-WIDE CODE BELOW THIS LINE
 
 
-
-
-  //UTILITY FUNCTIONS
-
-  // Function to make elements a little faster to create with less code. Any passthrough variable that is not needed should be declared as null.
-  // Example: let sideButton = makeSimpleButton("div", "simpleButton1", "buttonClass");
-  // Returns an element object
-  // TODO: look into function currying to make this better
-  const makeSimpleElem = function(elementKind, idN, classN) {
-
-    let simpleElement = document.createElement(elementKind ? elementKind : "div");
-
-    simpleElement.id = idN ? idN : null;
-
-    simpleElement.className = classN ? classN : null;
-
-    return simpleElement;
-  };
-
-  //Function that takes a number, a value to add to the number, and a lower value and higher value to specify a range.
-  //Adds addVal to origVal as long is it doesn't exceed the range.
-  //Range inclusive. Returns an object with the sum of origVal+addVal and a boolean value specifying whether requested summation is within bounds.
-  //Example: aggregateWithinBounds(-4, 10, numberToAddTo, 1);
-  const aggregateWithinBounds = function(rangeOne, rangeTwo, origVal, addVal) {
-    //Throws error if rangeOne isn't less than rangeTwo.
-    if(rangeOne < rangeTwo){
-      if (origVal + addVal >= rangeOne && origVal + addVal <= rangeTwo){
-        console.log("Requested summation successful.");
-        return {resultNum:origVal+addVal, isWithinRange: true};
-      } else {
-        console.log("Requested summation using aggregateWithinBounds is out of specified range.");
-        return {resultNum:origVal, isWithinRange: false};
-      }
-    } else {
-      console.error("Function aggregateWithinBounds was likely given bad value(s). First range value should be less than the second range value. rangeOne: "+rangeOne+" rangeTwo: "+rangeTwo);
-      return;
-    }
-  };
-
-
   switch(pageLocID){
     case "index":
       indexInit();
@@ -331,3 +212,7 @@ init = function(pageLocID) {
       break;
   }
 };
+
+document.addEventListener('DOMContentLoaded', function() {
+  init('index');
+});
