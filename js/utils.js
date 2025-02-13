@@ -21,15 +21,15 @@
   //Returns an array with all the 'tags' attributes in the specified database concatenated.
   export const getCombinedTags = function(db) {
     let combinedArray = [];
-    for(x of db) {
-      for(i of x.tags) {
+    for(let x of db) {
+      for(let i of x.tags) {
         if (!combinedArray.includes(i)) {
           combinedArray.push(i);
         };
       };
     };
     return combinedArray;
-  };
+  };onload="init('art-things')"
 
 
   // Function to make elements a little faster to create with less code. Any passthrough variable that is not needed should be declared as null.
