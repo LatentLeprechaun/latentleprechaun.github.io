@@ -1,19 +1,12 @@
 import *  as utillat from "./utils.js";
 
 //Image Database and Tag functions
-// Look up JSON files for this database
-// Getter/Setter functions not really required for this database since it's static, but keep in mind if I change it to dynamic.
+//Need to make this a proper database at some point
+//Getter/Setter functions not really required for this database since it's static, but keep in mind if I change it to dynamic.
 import { imageDB } from "./imageDB.js";
 
-//This directory pointer is temporary. Will need to be put in its own directory when the website is moved to a proper web server instead of just Github.
-//import jsonData from './ImageDB.json' assert { type: 'json' };
-//console.log(jsonData);
-
-//TODO: Finish adjusting script references in all the other html pages and make a way for the javascript to know which page it's on
 //TODO: Finish combing through code to remove unnecessary code blocks and make it DRYer
 //TODO: Make images load as thumbnails by default and upgrade to full resolution in gallery mode.
-//TODO: read up on the .set function, .flatmap, and other array/object functions
-
 const init = function(pageLocID) {
 
   //----- MAIN PAGE SCRIPTS -----
@@ -69,7 +62,7 @@ const init = function(pageLocID) {
       const galleryPopupExit = document.createElement("img");
       galleryPopupExit.id = "galleryPopupExit";
       galleryPopupExit.src = "img/exitX.png";
-      galleryPopupExit.addEventListener('click', function() {galleryPopupContainer.remove()});
+      galleryPopupExit.addEventListener('click', () => {galleryPopupContainer.remove()});
       galleryPopupContainer.appendChild(galleryPopupExit);
 
       //Gallery Image
@@ -85,13 +78,14 @@ const init = function(pageLocID) {
       //Changes image and prevents imgNum from going outside the range of where the images are stored in imageDB.
       galleryLeftButton.addEventListener('click', function() {
         let leftGalButtonAgVal = utillat.aggregateWithinBounds(0, imageDB.length - 1, imgNum, -1);
-        if(leftGalButtonAgVal.isWithinRange == true){
+        if(leftGalButtonAgVal.isWithinRange){
           imgNum = leftGalButtonAgVal.resultNum;
           galleryPopupImage.src = getImgPath(imgNum, "large", imageDB);
         };
       });
+      
       //Update function of galleryLeftButton that controls whether the arrow is grayed out or not. Called by a click event function attached to galleryPopupContainer.
-      galleryLeftButton.galleryUpdate = function (imageNumber) {
+      galleryLeftButton.galleryUpdate = (imageNumber) => {
         if (imageNumber <= 0) {
           galleryLeftButton.style.background = "rgba(0, 0, 0, 0.2)";
         } else {
@@ -105,13 +99,13 @@ const init = function(pageLocID) {
       //Changes image and prevents imgNum from going outside the range of where the images are stored in imageDB.
       galleryRightButton.addEventListener('click', function() {
         let rightGalButtonAgVal = utillat.aggregateWithinBounds(0, imageDB.length - 1, imgNum, 1);
-        if(rightGalButtonAgVal.isWithinRange == true){
+        if(rightGalButtonAgVal.isWithinRange){
           imgNum = rightGalButtonAgVal.resultNum;
           galleryPopupImage.src = getImgPath(imgNum, "large", imageDB);
         };
       });
       //Update function of galleryRightButton that controls whether the arrow is grayed out or not. Called by a click event function attached to galleryPopupContainer.
-      galleryRightButton.galleryUpdate = function (imageNumber, imageDatabase) {
+      galleryRightButton.galleryUpdate = (imageNumber, imageDatabase) => {
         if (imageNumber >= imageDatabase.length - 1) {
           galleryRightButton.style.background = "rgba(0, 0, 0, 0.2)";
         } else {
@@ -192,27 +186,30 @@ const init = function(pageLocID) {
 
 
   switch(pageLocID){
-    case "index":
+    case "http://localhost:81/index.html":
       indexInit();
       break;
-    case "code-things":
+    case "http://localhost:81/code-things.html":
       codeThingsInit();
       break;
-    case "art-things":
+    case "http://localhost:81/art-things.html":
       artThingsInit();
       break;
-    case "voice-overs":
+    case "http://localhost:81/voice-overs.html":
       voiceOversInit();
       break;
-    case "contact":
+    case "http://localhost:81/contact.html":
       contactInit();
       break;
-    case "writing-things":
+    case "http://localhost:81/writing-things.html":
       writingThingsInit();
       break;
   }
 };
 
+
+//Change this to only look for the last part of the URI instead of the whole URI. WILL NOT WORK RELIABLY IN ITS CURRENT STATE
 document.addEventListener('DOMContentLoaded', function() {
-  init('index');
+  init(document.documentURI);
+  console.log(document.documentURI);
 });
