@@ -1,9 +1,8 @@
-import *  as utillat from "./utils.js";
+//DISABLING IMPORTS FOR NOW SINCE IT DOESN'T WORK ON GITHUB SITE HOSTING
+//USING GLOBAL VARIABLES INSTEAD TEMPORARILY
 
-//Image Database and Tag functions
-//Need to make this a proper database at some point
-//Getter/Setter functions not really required for this database since it's static, but keep in mind if I change it to dynamic.
-import { imageDB } from "./imageDB.js";
+//import *  as utillat from "./utils.js";
+//import { imageDB } from "./imageDB.js";
 
 //TODO: Finish combing through code to remove unnecessary code blocks and make it DRYer
 //TODO: Make images load as thumbnails by default and upgrade to full resolution in gallery mode.
@@ -23,7 +22,7 @@ const init = function(pageLocID) {
   const artThingsInit = function() {
     console.info("Page location should be art-things: " + document.location.origin + document.location.pathname);
 
-    let iTags = utillat.getCombinedTags(imageDB);
+    let iTags = getCombinedTags(imageDB);
 
     console.info('Image database initialized');
 
@@ -73,11 +72,11 @@ const init = function(pageLocID) {
       console.log("galleryPopup imgNum = " + imgNum);
 
       //Gallery Side Button Function
-      const galleryLeftButton = utillat.makeSimpleElem("img", "galleryLeftButton", "galleryNavigationButtons");
+      const galleryLeftButton = makeSimpleElem("img", "galleryLeftButton", "galleryNavigationButtons");
       galleryLeftButton.src = "img/ArrowChevronLeft.svg";
       //Changes image and prevents imgNum from going outside the range of where the images are stored in imageDB.
       galleryLeftButton.addEventListener('click', function() {
-        let leftGalButtonAgVal = utillat.aggregateWithinBounds(0, imageDB.length - 1, imgNum, -1);
+        let leftGalButtonAgVal = aggregateWithinBounds(0, imageDB.length - 1, imgNum, -1);
         if(leftGalButtonAgVal.isWithinRange){
           imgNum = leftGalButtonAgVal.resultNum;
           galleryPopupImage.src = getImgPath(imgNum, "large", imageDB);
@@ -94,11 +93,11 @@ const init = function(pageLocID) {
       };
       galleryPopupContainer.appendChild(galleryLeftButton);
 
-      const galleryRightButton = utillat.makeSimpleElem("img", "galleryRightButton", "galleryNavigationButtons");
+      const galleryRightButton = makeSimpleElem("img", "galleryRightButton", "galleryNavigationButtons");
       galleryRightButton.src = "img/ArrowChevronRight.svg";
       //Changes image and prevents imgNum from going outside the range of where the images are stored in imageDB.
       galleryRightButton.addEventListener('click', function() {
-        let rightGalButtonAgVal = utillat.aggregateWithinBounds(0, imageDB.length - 1, imgNum, 1);
+        let rightGalButtonAgVal = aggregateWithinBounds(0, imageDB.length - 1, imgNum, 1);
         if(rightGalButtonAgVal.isWithinRange){
           imgNum = rightGalButtonAgVal.resultNum;
           galleryPopupImage.src = getImgPath(imgNum, "large", imageDB);
@@ -124,7 +123,7 @@ const init = function(pageLocID) {
 
     //Sets up the tags
     iTags.forEach((uniqueTag) => {
-      const tagElement = utillat.makeSimpleElem('div', `imageTag-${uniqueTag}`, 'imageTags');
+      const tagElement = makeSimpleElem('div', `imageTag-${uniqueTag}`, 'imageTags');
       tagElement.textContent = uniqueTag;
       document.getElementById('tagsPanel').appendChild(tagElement);
       tagElement.addEventListener('click', function () { setFilter(uniqueTag) });

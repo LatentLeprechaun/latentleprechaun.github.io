@@ -1,4 +1,6 @@
-export let imageDB = [
+//Need to convert this back to a module once I have proper web hosting
+
+let imageDB = [
 
 	// {
 	//   name: "",
