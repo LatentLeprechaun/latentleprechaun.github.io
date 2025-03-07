@@ -130,7 +130,6 @@ const makeSimpleElem = function(elementKind, idN, classN) {
 //import { imageDB } from "./imageDB.js";
 
 //TODO: Finish combing through code to remove unnecessary code blocks and make it DRYer
-//TODO: Make images load as thumbnails by default and upgrade to full resolution in gallery mode.
 const init = function(pageLocID) {
 
   //----- MAIN PAGE SCRIPTS -----
@@ -165,7 +164,7 @@ const init = function(pageLocID) {
       if (size === "large") {
         return "/images/" + db[loc].fileName;
       } else if (size === "thumbnail") {
-        return "/images/thumbnails" + db[loc].fileName;
+        return "/images/thumbnails/" + "thumbnail_" + db[loc].fileName;
       } else {
         console.error("getImgPath(" + loc + ", " + size + ") is having problems.");
         return false;
@@ -267,7 +266,7 @@ const init = function(pageLocID) {
       const x = document.createElement("img");
       x.className = "galleryImage";
       x.id = "galleryImage" + i;
-      x.src = getImgPath(i, "large", imageDB);
+      x.src = getImgPath(i, "thumbnail", imageDB);
 
       //TODO: Look up difference between var and let in regards to loops and inputting the iterator to a function outside the scope.
       x.addEventListener('click', function () { galleryPopup(i) });
