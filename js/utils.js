@@ -1,10 +1,11 @@
-  //Need to revert this back to a module once I have proper web hosting  
+  //CURRENTLY UNUSED FILE
+  //Need to add this module back once I have proper web hosting  
   
   //Function that takes a number, a value to add to the number, and a lower value and higher value to specify a range.
   //Adds addVal to origVal as long is it doesn't exceed the range.
   //Range inclusive. Returns an object with the sum of origVal+addVal and a boolean value specifying whether requested summation is within bounds.
   //Example: aggregateWithinBounds(-4, 10, numberToAddTo, 1);
-  const aggregateWithinBounds = function(rangeOne, rangeTwo, origVal, addVal) {
+  export const aggregateWithinBounds = function(rangeOne, rangeTwo, origVal, addVal) {
     //Throws error if rangeOne isn't less than rangeTwo.
     if(rangeOne < rangeTwo){
       if (origVal + addVal >= rangeOne && origVal + addVal <= rangeTwo){
@@ -21,7 +22,7 @@
   };
 
   //Returns an array with all the 'tags' attributes in the specified database concatenated.
-  const getCombinedTags = function(db) {
+  export const getCombinedTags = function(db) {
     let combinedArray = [];
     for(let x of db) {
       for(let i of x.tags) {
@@ -38,7 +39,7 @@
   // Example: let sideButton = makeSimpleButton("div", "simpleButton1", "buttonClass");
   // Returns an element object
   // TODO: look into function currying to make this better
-  const makeSimpleElem = function(elementKind, idN, classN) {
+  export const makeSimpleElem = function(elementKind, idN, classN) {
 
     let simpleElement = document.createElement(elementKind ? elementKind : "div");
 

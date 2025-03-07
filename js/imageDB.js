@@ -1,6 +1,7 @@
-//Need to convert this back to a module once I have proper web hosting
+//CURRENTLY UNUSED FILE
+//Need to add this module back once I have proper web hosting
 
-let imageDB = [
+export let imageDB = [
 
 	// {
 	//   name: "",
