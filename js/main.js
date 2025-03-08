@@ -309,22 +309,22 @@ const init = function(pageLocID) {
 
 
   switch(pageLocID){
-    case "http://localhost:81/index.html":
+    case `${window.location.origin}/index.html`:
       indexInit();
       break;
-    case "http://localhost:81/code-things.html":
+    case `${window.location.origin}/code-things.html`:
       codeThingsInit();
       break;
-    case "http://localhost:81/art-things.html":
+    case `${window.location.origin}/art-things.html`:
       artThingsInit();
       break;
-    case "http://localhost:81/voice-overs.html":
+    case `${window.location.origin}/voice-overs.html`:
       voiceOversInit();
       break;
-    case "http://localhost:81/contact.html":
+    case `${window.location.origin}/contact.html`:
       contactInit();
       break;
-    case "http://localhost:81/writing-things.html":
+    case `${window.location.origin}/writing-things.html`:
       writingThingsInit();
       break;
   }
@@ -335,4 +335,5 @@ const init = function(pageLocID) {
 document.addEventListener('DOMContentLoaded', function() {
   init(document.documentURI);
   console.log(document.documentURI);
+  console.log(window.location.origin);
 });
