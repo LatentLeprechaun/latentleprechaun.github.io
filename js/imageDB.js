@@ -1,7 +1,7 @@
-//CURRENTLY UNUSED FILE
+
 //Need to add this module back once I have proper web hosting
 
-export let imageDB = [
+let imageDB = [
 
 	// {
 	//   name: "",
