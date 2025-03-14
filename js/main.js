@@ -1,5 +1,30 @@
 //DISABLING IMPORTS FOR NOW SINCE IT DOESN'T WORK ON GITHUB SITE HOSTING
 
+//Grocery database for testing
+let foodItems = [
+  {
+    name: "spinach",
+    price: "2.50",
+    dateAdded: "2.4.25",
+    foodType: "vegetable"
+  },
+
+  {
+    name: "chocolate milk",
+    price: "4.99",
+    dateAdded: "2.5.25",
+    foodType: "sweet beverage"
+  },
+
+  {
+    name: "1lb minced beef",
+    price: "7.99",
+    dateAdded: "2.1.25",
+    foodType: "meat"
+  }
+]
+
+
 //Need to convert this back to a module once I have proper web hosting
 
 let imageDB = [
